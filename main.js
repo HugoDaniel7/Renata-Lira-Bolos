@@ -46,11 +46,12 @@ const cart = [];
 addToCartButtons.forEach(button => {
     button.addEventListener('click', () => {
         const price = parseFloat(button.dataset.price);
-        const itemName = button.parentElement.querySelector('h2').textContent;
+        const itemName = button.parentElement.querySelector('h5').textContent; // Alterado para buscar o nome correto
         cart.push({ name: itemName, price });
         updateCart();
     });
 });
+
 
 // Atualizar carrinho
 function updateCart() {
@@ -112,3 +113,246 @@ function closePopup() {
         popupOverlay.remove();
     }
 }
+
+
+
+
+
+
+
+// Função para mover cards e centralizar apenas em telas menores
+let currentIndex = 0;
+
+const moveCarousel = (direction) => {
+    const carousel = document.getElementById('carousel');
+    const cards = document.querySelectorAll('#carousel #card');
+    const totalCards = cards.length;
+
+    currentIndex += direction;
+
+    if (currentIndex < 0) {
+        currentIndex = totalCards - 1;
+    } else if (currentIndex >= totalCards) {
+        currentIndex = 0;
+    }
+
+    // Verifica se a tela é menor que 768px (tamanho de tablets e celulares)
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        const cardWidth = cards[0].offsetWidth;
+        const carouselWidth = document.getElementById('carousel-container').offsetWidth;
+        const offset = -currentIndex * cardWidth + (carouselWidth - cardWidth) / 2;
+
+        carousel.style.transform = `translateX(${offset}px)`;
+    } else {
+        // Para telas maiores, mantém o comportamento normal (sem centralizar)
+        const offset = -currentIndex * 300;
+        carousel.style.transform = `translateX(${offset}px)`;
+    }
+
+    
+};
+
+
+
+
+
+// Função para mover o carrossel 2
+let currentIndex2 = 0;
+
+const moveCarousel2 = (direction) => {
+    const carousel2 = document.getElementById('carousel-2');
+    const cards2 = document.querySelectorAll('#carousel-2 #card-2');
+    const totalCards2 = cards2.length;
+
+    currentIndex2 += direction;
+
+    if (currentIndex2 < 0) {
+        currentIndex2 = totalCards2 - 1;
+    } else if (currentIndex2 >= totalCards2) {
+        currentIndex2 = 0;
+    }
+
+    // Verifica se a tela é menor que 768px (tamanho de tablets e celulares)
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        const cardWidth2 = cards2[0].offsetWidth;
+        const carouselWidth2 = document.getElementById('carousel-container-2').offsetWidth;
+        const offset2 = -currentIndex2 * cardWidth2 + (carouselWidth2 - cardWidth2) / 2;
+
+        carousel2.style.transform = `translateX(${offset2}px)`;
+    } else {
+        // Para telas maiores, mantém o comportamento normal (sem centralizar)
+        const offset2 = -currentIndex2 * 300;
+        carousel2.style.transform = `translateX(${offset2}px)`;
+    }
+};
+
+
+
+
+
+
+// Função para mover o Carrossel 3
+let currentIndex3 = 0;
+
+const moveCarousel3 = (direction) => {
+    const carousel3 = document.getElementById('carousel-3');
+    const cards3 = document.querySelectorAll('#carousel-3 #card-3');
+    const totalCards3 = cards3.length;
+
+    currentIndex3 += direction;
+
+    if (currentIndex3 < 0) {
+        currentIndex3 = totalCards3 - 1;
+    } else if (currentIndex3 >= totalCards3) {
+        currentIndex3 = 0;
+    }
+
+    // Verifica se a tela é menor que 768px (para celulares e tablets)
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        const cardWidth3 = cards3[0].offsetWidth;
+        const carouselWidth3 = document.getElementById('carousel-container-3').offsetWidth;
+        const offset3 = -currentIndex3 * cardWidth3 + (carouselWidth3 - cardWidth3) / 2;
+
+        carousel3.style.transform = `translateX(${offset3}px)`;
+    } else {
+        // Para telas maiores, mantém o comportamento normal
+        const offset3 = -currentIndex3 * 300;
+        carousel3.style.transform = `translateX(${offset3}px)`;
+    }
+};
+
+
+// Função para mover o Carrossel 4
+let currentIndex4 = 0;
+
+const moveCarousel4 = (direction) => {
+    const carousel4 = document.getElementById('carousel-4');
+    const cards4 = document.querySelectorAll('#carousel-4 .card-4');
+    const totalCards4 = cards4.length;
+
+    currentIndex4 += direction;
+
+    if (currentIndex4 < 0) {
+        currentIndex4 = totalCards4 - 1;
+    } else if (currentIndex4 >= totalCards4) {
+        currentIndex4 = 0;
+    }
+
+    // Ajuste para telas menores (responsivo)
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        const cardWidth4 = cards4[0].offsetWidth;
+        const carouselWidth4 = document.getElementById('carousel-container-4').offsetWidth;
+        const offset4 = -currentIndex4 * cardWidth4 + (carouselWidth4 - cardWidth4) / 2;
+
+        carousel4.style.transform = `translateX(${offset4}px)`;
+    } else {
+        // Para telas maiores
+        const offset4 = -currentIndex4 * 300;
+        carousel4.style.transform = `translateX(${offset4}px)`;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Executa a função ao carregar a página
+document.addEventListener("DOMContentLoaded", function () {
+    moveCarousel(0);
+});
+
+
+// Função genérica para redirecionamento
+function redirecionar(url) {
+    window.open(url, "_blank");
+}
+
+// Exemplos de uso da função genérica de redirecionamento
+function redirecionarParaPagina6() {
+    redirecionar("https://github.com/HugoDaniel7/AppManagerTrain-1.git");
+}
+
+function redirecionarParaPagina7() {
+    redirecionar("https://www.mediafire.com/file/kl9moukuauugsej/app-debug.apk/file");
+}
+
+function redirecionarParaPagina8() {
+    redirecionar("https://github.com/HugoDaniel7/Renata-Lira-Bolos.git");
+}
+
+function redirecionarParaPagina9() {
+    redirecionar("https://renatalirabolos.netlify.app/");
+}
+
+function redirecionarParaPagina10() {
+    redirecionar("https://github.com/HugoDaniel7/Gerador-de-Texto-com-planilhas.git");
+}
+
+function redirecionarParaPagina11() {
+    redirecionar("https://gerador-de-texto-com-planilhas.netlify.app/");
+}
+
+function redirecionarParaPagina12() {
+    redirecionar("https://github.com/FabioHTGuimaraes/Contagem-Regressiva-De-Namoro");
+}
+
+function redirecionarParaPagina13() {
+    redirecionar("https://contagem-regressiva-de-namoro.netlify.app");
+}
+
+function redirecionarParaPagina15() {
+    redirecionar("https://github.com/FabioHTGuimaraes/Gerador-QrCode");
+}
+
+function redirecionarParaPagina16() {
+    redirecionar("https://geradorqrcodefg.netlify.app/");
+}
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.2 });
+
+    elements.forEach(el => observer.observe(el));
+});
+

@@ -7,47 +7,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="img/logo2-renata-removebg-preview (1).png" type="image/png" sizes="128x128">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-      .cart-btn {
-          position: fixed;
-          bottom: 20px;
-          left: 20px;
-          background-color: #393939;
-          color: white;
-          border: none;
-          padding: 10px 20px;
-          border-radius: 5px;
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-      }
 
-      .cart-btn img {
-          width: 20px;
-          height: 20px;
-          margin-right: 8px;
-      }
-
-      .cart-counter {
-          position: fixed;
-          bottom: 20px;
-          left: 60px;
-          background-color: #ff9800;
-          color: white;
-          border-radius: 50%;
-          width: 30px;
-          height: 30px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 16px;
-      }
-    </style>
 </head>
 <body>
-    <header>
+    <header >
         <nav>
-          <a class="logo" href="">
+          <a class="logo reveal" href="">
             <img src="img/logo3-removebg-preview.png" alt="Logo" class="logo-img"> RENATA LIRA BOLOS
           </a>
           <div class="mobile-menu">
@@ -64,186 +29,260 @@
         </nav>
       </header>
 
-      <h1 id="texto-inicio" style="text-align: center; color: #393939; margin-top: 25px;">Bolos de Festa</h1>
 
-      <!-- Seção Bolos -->
-      <section class="menu" id="menu">
-        <div class="card">
-            <img src="img/15-removebg-preview.png" alt="Prato 1">
-            <h2>Bolo 15 fatias</h2>
-            <p>Bolo 15 fatias</p>
-            <p><strong>Preço: R$100,00</strong></p>
-            <button class="add-to-cart" data-price="100">Adicionar à Sacola</button>   
-        </div>
 
-        <div class="card">
-            <img src="img/20-removebg-preview.png" alt="Prato 2">
-            <h2>Bolo 20 fatias</h2>
-            <p>Bolo 20 fatias</p>
-            <p><strong>Preço: R$140,00</strong></p>
-            <button class="add-to-cart" data-price="140">Adicionar à Sacola</button>   
-        </div>
 
-        <div class="card">
-            <img src="img/30-removebg-preview.png" alt="Prato 3">
-            <h2>Bolo 30 fatias</h2>
-            <p>Bolo 30 fatias</p>
-            <p><strong>Preço: R$160,00</strong></p>
-            <button class="add-to-cart" data-price="160">Adicionar à Sacola</button>   
-        </div>
+      <div class="reveal" id="Projetos">
 
-        <div class="card">
-            <img src="img/40-removebg-preview.png" alt="Prato 4">
-            <h2>Bolo 40 fatias</h2>
-            <p>Bolo 40 fatias</p>
-            <p><strong>Preço: R$180,00</strong></p>
-            <button class="add-to-cart" data-price="180">Adicionar à Sacola</button>   
-        </div>
+        <h1 id="texto-inicio" class="reveal" style="text-align: center; color: #393939; margin-top: 25px; font-size: 30px;">Bolos de Festa</h1>
+    
+    
+        <!-- Unício do Contêiner do carrossel -->
+        <div id="carousel-container" class="reveal">
+    
+            <button class="carousel-btn left" onclick="moveCarousel(-1)">❮</button>
+    
+            <div id="carousel">
+    
+               <div id="card">
+                    <img src="img/15fatias.jpg" id="card-img">
+                    <div id="card-corpo">
+    
+                        <h5 id="card-titulo">Bolo 15 fatias</h5>
+                        <h5 id="card-texto"></h5>
+                            <p style="text-align: center;" ><strong>Preço: R$110,00<br><br></strong></p>
+                            <button class="add-to-cart" data-price="110" >Adicionar à Sacola</button>    
+                    </div>
 
-        <div class="card">
-            <img src="img/50-removebg-preview.png" alt="Prato 5">
-            <h2>Bolo 50 fatias</h2>
-            <p>Bolo 50 fatias</p>
-            <p><strong>Preço: R$200,00</strong></p>
-            <button class="add-to-cart" data-price="200">Adicionar à Sacola</button>   
-        </div>
+                </div>
+    
+                <div id="card">
+                    <img src="img/20fatias.jpg" id="card-img">
+                    <div id="card-corpo">
+    
+                        <h5 id="card-titulo">Bolo 20 fatias</h5>
+                        <h5 id="card-texto"></h5>
+                            <p style="text-align: center;" ><strong>Preço: R$150,00<br><br></strong></p>
+                            <button class="add-to-cart" data-price="150" >Adicionar à Sacola</button>    
+                    </div>
 
-        <div class="card">
-            <img src="img/70-removebg-preview.png" alt="Prato 6">
-            <h2>Bolo 70 fatias</h2>
-            <p>Bolo 70 fatias</p>
-            <p><strong>Preço: R$270,00</strong></p>
-            <button class="add-to-cart" data-price="270">Adicionar à Sacola</button>   
-        </div>
+                </div>
+    
+                <div id="card">
+                    <img src="img/30fatias.jpg" id="card-img">
+                    <div id="card-corpo">
+    
+                        <h5 id="card-titulo">Bolo 30 fatias</h5>
+                        <h5 id="card-texto"></h5>
+                            <p style="text-align: center;" ><strong>Preço: R$170,00<br><br></strong></p>
+                            <button class="add-to-cart" data-price="170" >Adicionar à Sacola</button>    
+                    </div>
 
-        <div class="card">
-            <img src="img/bolo_15_fatias-removebg-preview.png" alt="Prato 7">
-            <h2>Bolo de corte</h2>
-            <p>Bolo de corte</p>
-            <p><strong>Preço: R$4,00 (a fatia)</strong></p>
-            <button class="add-to-cart" data-price="4">Adicionar à Sacola</button>   
+                </div>
+                
+                <div id="card">
+                    <img src="img/40fatias.jpg" id="card-img">
+    
+                    <div id="card-corpo">
+                        <h5 id="card-titulo">Bolo 40 fatias</h5>
+                        <h5 id="card-texto"></h5>
+                            <p style="text-align: center;" ><strong>Preço: R$190,00<br><br></strong></p>
+                            <button class="add-to-cart" data-price="190" >Adicionar à Sacola</button>    
+                    </div>
+
+                </div>
+    
+                <div id="card">
+                    <img src="img/50fatias.jpg" id="card-img">
+                    <div id="card-corpo">
+    
+                        <h5 id="card-titulo">Bolo 50 fatias</h5>
+                        <h5 id="card-texto"></h5>
+                            <p style="text-align: center;" ><strong>Preço: R$210,00<br><br></strong></p>
+                            <button class="add-to-cart" data-price="210" >Adicionar à Sacola</button>    
+                    </div>
+
+                </div>
+
+                <div id="card">
+                    <img src="img/70fatias.jpg" id="card-img">
+                    <div id="card-corpo">
+    
+                        <h5 id="card-titulo">Bolo 70 fatias (dois andares)</h5>
+                        <h5 id="card-texto"></h5>
+                            <p style="text-align: center;" ><strong>Preço: R$280,00</strong></p>
+                            <button class="add-to-cart" data-price="280" >Adicionar à Sacola</button>    
+                    </div>
+                </div>
+
+            </div>
+            <button class="carousel-btn right" onclick="moveCarousel(1)">❯</button>
         </div>
-      </section>
+    </div>
+            <!-- Fim do Contêiner do carrossel -->
+
+
+
+
 
       <hr class="separator">
 
       <!-- Seção Kits de Festa -->
-      <h1 id="kits" style="text-align: center; color: #393939; margin-top: 25px;">Kits de Festa</h1>
+      <div class="reveal" id="Projetos">
 
-      <section class="menu">
-        <div class="card">
-            <img src="img/kit1.jpg" alt="Kit 1">
-            <h2>Kit 1</h2>
-            <p>1 bolo temático 15 fatias</p>
-            <p>5 cupcakes</p>
-            <p>5 pirulitos</p>
-            <p>5 bolo no palito</p>
-            <p><strong>Preço: R$190,00</strong></p>
-            <button class="add-to-cart" data-price="190">Adicionar à Sacola</button>   
+        <h1 id="texto-inicio" class="reveal" style="text-align: center; color: #393939; margin-top: 25px; font-size: 30px;">Docinhos e Sabores</h1>
+    
+        <!-- Início do Contêiner do carrossel 2 -->
+        <div id="carousel-container-2" class="reveal">
+            <button class="carousel-btn left" onclick="moveCarousel2(-1)">❮</button>
+            <div id="carousel-2">
+                <div id="card-2">
+                    <img src="img/docinho-tradicionall.jpg" id="card-img-2">
+                    <div id="card-corpo-2">
+                        <h5 id="card-titulo-2">Docinho Tradicional <br>(100 unidades)</h5>
+                        <h5 id="card-texto-2"></h5>
+                        <p style="text-align: center;"><strong>Preço: R$100,00</strong></p>
+                        <button class="add-to-cart" data-price="100">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div id="card-2">
+                    <img src="img/docinho-tradicionall.jpg" id="card-img-2">
+                    <div id="card-corpo-2">
+                        <h5 id="card-titulo-2">Docinho Tradicional <br>(50 unidades)</h5>
+                        <h5 id="card-texto-2"></h5>
+                        <p style="text-align: center;"><strong>Preço: R$50,00</strong></p>
+                        <button class="add-to-cart" data-price="50">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div id="card-2">
+                    <img src="img/docinho gourmett.jpg" id="card-img-2">
+                    <div id="card-corpo-2">
+                        <h5 id="card-titulo-2">Docinho Gourmet</h5>
+                        <h5 id="card-texto-2"></h5>
+                        <p style="text-align: center;"><strong>Preço: R$130,00<br><br></strong></p>
+                        <button class="add-to-cart" data-price="130">Adicionar à Sacola</button>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn right" onclick="moveCarousel2(1)">❯</button>
+        </div>
+        <!-- Fim do Contêiner do carrossel 2 -->
+
+        <hr class="separator2">
+
+        <!-- Início do Contêiner do carrossel 3 -->
+
+        <h1 id="texto-inicio" style="text-align: center; color: #393939; margin-top: 25px; font-size: 30px;">Doces por unidade</h1>
+
+
+        <!-- Início do Contêiner do Carrossel 3 -->
+        <div id="carousel-container-3">
+            <button class="carousel-btn left" onclick="moveCarousel3(-1)">❮</button>
+            <div id="carousel-3">
+                <div id="card-3">
+                    <img src="img/docinho-tradicionall.jpg" id="card-img-3">
+                    <div id="card-corpo-3">
+                        <h5 id="card-titulo-3">Algodão<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$2,00</strong></p>
+                        <button class="add-to-cart" data-price="2">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div id="card-3">
+                    <img src="img/docinho-tradicionall.jpg" id="card-img-3">
+                    <div id="card-corpo-3">
+                        <h5 id="card-titulo-3">Maçã<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$2,50</strong></p>
+                        <button class="add-to-cart" data-price="2.50">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div id="card-3">
+                    <img src="img/docinho-tradicionall.jpg" id="card-img-3">
+                    <div id="card-corpo-3">
+                        <h5 id="card-titulo-3">Pirulito<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$3,00</strong></p>
+                        <button class="add-to-cart" data-price="3">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div id="card-3">
+                    <img src="img/docinho-tradicionall.jpg" id="card-img-3">
+                    <div id="card-corpo-3">
+                        <h5 id="card-titulo-3">Pipoca<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$3,00</strong></p>
+                        <button class="add-to-cart" data-price="3">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div id="card-3">
+                    <img src="img/docinho-tradicionall.jpg" id="card-img-3">
+                    <div id="card-corpo-3">
+                        <h5 id="card-titulo-3">Cupcake de chantilly<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$5,00</strong></p>
+                        <button class="add-to-cart" data-price="5">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div id="card-3">
+                    <img src="img/docinho-tradicionall.jpg" id="card-img-3">
+                    <div id="card-corpo-3">
+                        <h5 id="card-titulo-3">Donuts<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$1,50</strong></p>
+                        <button class="add-to-cart" data-price="1.50">Adicionar à Sacola</button>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn right" onclick="moveCarousel3(1)">❯</button>
         </div>
 
-        <div class="card">
-            <img src="img/kit2.jpg" alt="Kit 2">
-            <h2>Kit 2</h2>
-            <p>1 bolo temático 30 fatias</p>
-            <p>10 cupcakes</p>
-            <p>10 Trufas</p>
-            <p>10 pirulitos</p>
-            <p>5 bolo no palito</p>
-            <p>30 docinhos</p>
-            <p><strong>Preço: R$290,00</strong></p>
-            <button class="add-to-cart" data-price="290">Adicionar à Sacola</button>   
+        <hr class="separator3">
+        <!-- Fim do Contêiner do carrossel 3 -->
+
+        <h1 id="texto-inicio" style="text-align: center; color: #393939; margin-top: 25px; font-size: 30px;">Doces Luxo</h1>
+
+
+        <!-- Início do Contêiner do Carrossel 4 -->
+        <div id="carousel-container-4">
+            <button class="carousel-btn left" onclick="moveCarousel4(-1)">❮</button>
+            <div id="carousel-4">
+                <div class="card-4">
+                    <img src="img/docinho gourmett.jpg" class="card-img-4">
+                    <div class="card-corpo-4">
+                        <h5 class="card-titulo-4">Brigadeiro<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$2,00</strong></p>
+                        <button class="add-to-cart" data-price="2">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div class="card-4">
+                    <img src="img/docinho gourmett.jpg" class="card-img-4">
+                    <div class="card-corpo-4">
+                        <h5 class="card-titulo-4">Beijinho<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$2,50</strong></p>
+                        <button class="add-to-cart" data-price="2.50">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div class="card-4">
+                    <img src="img/docinho gourmett.jpg" class="card-img-4">
+                    <div class="card-corpo-4">
+                        <h5 class="card-titulo-4">Quindim<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$3,00</strong></p>
+                        <button class="add-to-cart" data-price="3">Adicionar à Sacola</button>
+                    </div>
+                </div>
+                <div class="card-4">
+                    <img src="img/docinho gourmett.jpg" class="card-img-4">
+                    <div class="card-corpo-4">
+                        <h5 class="card-titulo-4">Torta de Limão<br>(valor unitário)</h5>
+                        <p style="text-align: center;"><strong>Preço: R$5,00</strong></p>
+                        <button class="add-to-cart" data-price="5">Adicionar à Sacola</button>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn right" onclick="moveCarousel4(1)">❯</button>
         </div>
+        <!-- Fim do Contêiner do Carrossel 4 -->
 
-        <div class="card">
-            <img src="img/kit3.jpg" alt="Kit 3">
-            <h2>Kit 3</h2>
-            <p>1 bolo temático 30 fatias</p>
-            <p>10 cupcakes</p>            
-            <p>10 Trufas</p>
-            <p>10 pirulitos de marshmallow</p>
-            <p>50 docinhos</p>
-            <p><strong>Preço: R$300,00</strong></p>
-            <button class="add-to-cart" data-price="300">Adicionar à Sacola</button>   
-        </div>
 
-        <div class="card">
-            <img src="img/kit4.jpg" alt="Kit 4">
-            <p>1 bolo temático 30 fatias</p>
-            <p>10 cupcakes</p>            
-            <p>10 Trufas</p>
-            <p>10 pirulitos</p>
-            <p>5 bolo no palito</p>
-            <p>5 alfajor</p>
-            <p>30 docinhos</p>
-            <p><strong>Preço: R$350,00</strong></p>
-            <button class="add-to-cart" data-price="350">Adicionar à Sacola</button>   
-        </div>
 
-        <div class="card">
-            <img src="img/kit5.jpg" alt="Kit 5">
-            <h2>Kit 5</h2>
-            <p>1 bolo temático 40 fatias</p>
-            <p>10 cupcakes</p>            
-            <p>10 Trufas</p>
-            <p>10 pirulitos</p>
-            <p>5 bolo no palito</p>
-            <p>50 docinhos</p>
-            <p>100 salgados</p>
-            <p><strong>Preço: R$390,00</strong></p>
-            <button class="add-to-cart" data-price="390">Adicionar à Sacola</button>   
-        </div>
-      </section>
 
-      <hr class="separator">
 
-      <!-- Seção Kits de Doces -->
-      <h1 id="doces" style="text-align: center; color: #393939; margin-top: 25px;">Kits de Doces</h1>
 
-      <section class="menu">
-        <div class="card">
-            <img src="img/doce1.jpg" alt="Kit 1">
-            <h2>Kit 1</h2>
-            <p>10 maçãs do amor</p>
-            <p>5 brigadeiros</p>
-            <p>5 trufas</p>
-            <p><strong>Preço: R$90,00</strong></p>
-            <button class="add-to-cart" data-price="90">Adicionar à Sacola</button>   
-        </div>
-
-        <div class="card">
-            <img src="img/doce2.jpg" alt="Kit 2">
-            <h2>Kit 2</h2>
-            <p>20 maçãs do amor</p>
-            <p>10 brigadeiros</p>
-            <p>10 trufas</p>
-            <p>5 bolo no palito</p>
-            <p><strong>Preço: R$140,00</strong></p>
-            <button class="add-to-cart" data-price="140">Adicionar à Sacola</button>   
-        </div>
-
-        <div class="card">
-            <img src="img/doce3.jpg" alt="Kit 3">
-            <h2>Kit 3</h2>
-            <p>30 maçãs do amor</p>
-            <p>15 brigadeiros</p>
-            <p>15 trufas</p>
-            <p>10 bolo no palito</p>
-            <p><strong>Preço: R$190,00</strong></p>
-            <button class="add-to-cart" data-price="190">Adicionar à Sacola</button>   
-        </div>
-
-        <div class="card">
-            <img src="img/doce4.jpg" alt="Kit 4">
-            <h2>Kit 4</h2>
-            <p>40 maçãs do amor</p>
-            <p>20 brigadeiros</p>
-            <p>20 trufas</p>
-            <p>15 bolo no palito</p>
-            <p><strong>Preço: R$240,00</strong></p>
-            <button class="add-to-cart" data-price="240">Adicionar à Sacola</button>   
-        </div>
-      </section>
 
     <!-- Botão de carrinho -->
     <button class="cart-btn" style="position: fixed; padding: 10px 20px; font-size: 16px; background-color: #333; border: 1px solid #333; color: white;">
@@ -268,24 +307,7 @@
     <span class="arrow-up"></span>
   </button>
 
-      <!-- Seção de Contato -->
-      <section id="contato">
-        <h2>Contato</h2>
-        <p>Entre em contato e faça já sua encomenda.</p>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/renatalirabolos/?igsh=MXg2dzUwMmI3bGJ3aw%3D%3D#" target="_blank" class="icon insta">
-                <img src="img/icon-insta-removebg-preview.png" alt="insta">
-            </a>
-            <a href="https://api.whatsapp.com/send?1=pt_BR&phone=5521980882615" target="_blank" class="icon zap">
-                <img src="img/icon-zapzap-removebg-preview.png" alt="zap">
-            </a>
-            <a href="https://maps.app.goo.gl/xx493ChVEutiMMPe9" class="icon mapa">
-                <img src="img/icon-mapa-removebg-preview.png" alt="mapa">
-            </a>
-            
-            
-        </div>
-    </section>
+
 
   <script src="mobile-navbar.js"></script>
   <script src="main.js"></script>

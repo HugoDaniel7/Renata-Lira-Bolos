@@ -21,6 +21,7 @@ class MobileNavbar {
     handleClick() {
         this.navList.classList.toggle(this.activeClass);
         this.mobileMenu.classList.toggle(this.activeClass);
+        document.body.classList.toggle('menu-open'); // Adiciona ou remove a classe 'menu-open'
         this.animateLinks();
     }
 
@@ -33,6 +34,7 @@ class MobileNavbar {
     closeMenu() {
         this.navList.classList.remove(this.activeClass);
         this.mobileMenu.classList.remove(this.activeClass);
+        document.body.classList.remove('menu-open'); // Remove a classe 'menu-open' quando o menu for fechado
         this.navLinks.forEach(link => {
             link.style.animation = "";
         });
