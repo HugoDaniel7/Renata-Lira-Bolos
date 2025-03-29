@@ -1,40 +1,25 @@
 // Função para redirecionar para o facebook
 function redirecionarParaPagina1() {
     // Redireciona para outra página
-    window.open("https://www.facebook.com/", "_blank");
+    window.open("https://www.facebook.com/share/18b8XP5bY6/", "_blank");
 }
 
-// Função para redirecionar para o tiktok
-function redirecionarParaPagina2() {
-    // Redireciona para outra página
-    window.open("https://www.tiktok.com/", "_blank");
-}
-
-// Função para redirecionar para o linkedin
 function redirecionarParaPagina3() {
     // Redireciona para outra página
-    window.open("https://www.whatsapp.com/", "_blank");
+    window.open("https://wa.me/5521980882615", "_blank");
 }
 
 // Função para redirecionar para o whatsapp
 function redirecionarParaPagina4() {
     // Redireciona para outra página
-    window.open("https://www.instagram.com/", "_blank");
+    window.open("https://www.instagram.com/renatalirabolos?igsh=MXg2dzUwMmI3bGJ3aw==", "_blank");
 }
 
 // Função para redirecionar para o instagram
 function redirecionarParaPagina5() {
     // Redireciona para outra página
-    window.open("https://www.google.com/maps?authuser=0", "_blank");
+    window.open("https://maps.app.goo.gl/3gXX4un4dZAwni8ZA", "_blank");
 }
-
-// Função para redirecionar para o linkedin
-function redirecionarParaPagina6() {
-    // Redireciona para outra página
-    window.open("https://www.linkedin.com/in/fabioguimaraes1/", "_blank");
-}
-
-
 
 
 
@@ -513,3 +498,8 @@ function atualizarPreco(precoUnitario, quantidadeId, totalId) {
     const total = precoUnitario * quantidade;
     document.getElementById(totalId).textContent = total.toFixed(2);
 }
+
+
+
+
+
