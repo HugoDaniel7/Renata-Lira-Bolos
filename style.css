@@ -5,7 +5,7 @@
 
 body {
     font-family: "roboto mono", sans-serif;
-    background-image: url('img/fundoeosa2.jpg'); /* Substitua pelo caminho correto */
+    background: linear-gradient(135deg, #ffffff, #ffb3f0, #f8bcf3);
     background-repeat: repeat; /* Faz a imagem se repetir */
     background-size: auto; /* Mantém o tamanho original da imagem */
     background-position: top left; /* Começa a repetição do topo esquerdo */    color: #000000;
@@ -27,8 +27,14 @@ header {
     display: flex; 
     align-items: center; 
     justify-content: space-between;
-    background-color: #343434;
+    background-color: #ff00ea;
     color: #fff;
+    position: fixed; /* Torna a navbar fixa */
+    top: 0; /* Fixa a navbar no topo */
+    left: 0; /* Fixa a navbar à esquerda */
+    right: 0; /* Fixa a navbar à direita */
+    z-index: 1000; /* Garante que a navbar fique sobre outros elementos */
+    padding: 10px 20px; /* Ajuste o padding conforme necessário */
 }
 
 #imgheader {
@@ -419,7 +425,7 @@ button:hover {
 /* Adiciona estilo para o rodapé do projeto */
 
 footer {
-    background-color: #343434;
+    background-color: #ff00ea;
     color: #fff;
     margin-top: auto;
     text-align: center;
@@ -907,4 +913,236 @@ footer {
         display: none;
     }
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    /* Ajustes nos modais para melhor visualização */
+    .modal-content {
+        width: 90%;
+        margin: 5% auto;
+    }
+    
+    .modal-info {
+        padding: 15px;
+    }
+    
+    .modal-info h2 {
+        font-size: 1.8rem;
+    }
+    
+    .modal-info p, .modal-info strong {
+        font-size: 1.2rem;
+    }
+    
+    .modal-options h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    
+    .modal-options label {
+        font-size: 1.2rem;
+        margin: 10px 0;
+        display: block;
+    }
+    
+    .description-container label {
+        font-size: 1.2rem;
+        margin-top: 15px;
+        display: block;
+    }
+    
+    .desc {
+        font-size: 1.1rem;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Ajuste no carrinho */
+    .modal-content1 {
+        width: 95%;
+    }
+    
+    .modal-info1 h2 {
+        font-size: 1.8rem;
+    }
+    
+    .customer-info label {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        display: block;
+    }
+    
+    .customer-info input, .customer-info select {
+        font-size: 1.1rem;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
+    
+    /* Botões maiores para melhor usabilidade */
+    #add-to-cart-button, #finalize-btn {
+        padding: 12px 20px;
+        font-size: 1.2rem;
+        margin-top: 15px;
+    }
+    
+    /* Ajuste no cabeçalho do modal */
+    .close {
+        font-size: 2rem;
+        padding: 0 15px;
+    }
+    /* Ajuste no grid de produtos para espaçamento uniforme */
+    .product-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px; /* Espaçamento igual entre todos os cards */
+        margin: 15px 0;
+    }
+
+    .product-card {
+        margin: 0; /* Remove margens individuais para o gap controlar o espaçamento */
+        width: 100%; /* Garante que ocupem toda a largura disponível */
+        box-sizing: border-box;
+    }
+        /* Ajuste para aumentar a logo */
+        header img#imgheader {
+            width: 80px; /* ou o tamanho que preferir */
+            height: auto;
+        }
+    
+        /* Ajuste do texto ao lado da logo se necessário */
+        #txtheader {
+            font-size: 0.9rem; /* Aumentando o tamanho do texto */
+            margin-left: 10px; /* Espaçamento adequado */
+        }
+        /* Ajuste no container do carrinho */
+        #carrinho {
+            font-size: 1.5px; /* Aumentando o ícone do carrinho */
+        }
+            /* Ajuste para o X do carrinho ficar preto */
+    .modal1 .close {
+        color: #000;
+
+    }
+
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    /* Carrinho de compras - Modal */
+    .modal1 .modal-content1 {
+        width: 85%;
+        height: 70%;
+        max-width: 100%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    /* Itens do carrinho */
+    #cart-items1 {
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+
+    .cart-item {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .cart-item-info {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .cart-item-price {
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    /* Formulário de cliente */
+    .customer-info {
+        padding: 10px 0;
+    }
+
+    .customer-info input,
+    .customer-info select {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        font-size: 16px;
+    }
+
+    /* Total e botão */
+    #cart-total {
+        font-size: 1.3rem;
+        margin: 15px 0;
+        padding: 10px;
+        background: #f8f8f8;
+        border-radius: 5px;
+    }
+
+    #finalize-btn {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2rem;
+        margin: 10px 0;
+    }
+
+    /* Ajustes para o cabeçalho do carrinho */
+    .modal-info1 h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    /* Ícone de fechar */
+    .modal1 .close {
+        font-size: 2rem;
+        top: 10px;
+        right: 15px;
+    }
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    /* Ajuste apenas para os modais dos cards (excluindo o carrinho) */
+    .modal:not(.modal1) .close {
+        color: white !important;
+        text-shadow: 0 0 3px rgba(0,0,0,0.5);
+        font-size: 2rem;
+    }
+
+    /* Remove justificação de texto nos cards abertos */
+    .modal:not(.modal1) .modal-info p,
+    .modal:not(.modal1) .modal-info .product-description,
+    .modal:not(.modal1) .modal-info .modal-options label {
+        text-align: left !important;
+        text-justify: unset !important;
+    }
+
+    /* Mantém o espaçamento natural */
+    .modal:not(.modal1) .modal-info {
+        text-align: left;
+    }
 }

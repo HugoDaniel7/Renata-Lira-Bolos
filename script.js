@@ -79,418 +79,88 @@ window.onclick = function(event) {
 
 // Função para adicionar ao carrinho
 function addToCart(productName, productPrice, modalId) {
-    // Captura o nome do bolo (já está sendo capturado)
-    const boloNome = productName;
+    // Captura a quantidade (se existir no modal)
+    const quantidadeInput = document.querySelector(`#${modalId} input[type="number"]`);
+    const quantidade = quantidadeInput ? parseInt(quantidadeInput.value) || 1 : 1;
+    
+    // Calcula o total considerando a quantidade
+    const total = productPrice * quantidade;
 
-    // Captura o recheio selecionado (apenas um)
-    const recheio = document.querySelector(`input[name="recheio"]:checked`)?.value;
+    // Captura o recheio selecionado (se existir)
+    const recheio = document.querySelector(`#${modalId} input[name="recheio"]:checked`)?.value;
 
-    // Captura o comentário do modal específico
+    // Captura a descrição/tema (se existir)
     const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
 
-    // O preço já vem embutido no valor do bolo
-    let total = productPrice;
-
-    // Criação do item a ser adicionado ao carrinho
+    // Criação do item no carrinho
     const cartItemsContainer = document.getElementById("cart-items1");
     const item = document.createElement("div");
     item.classList.add("cart-item");
 
     const removeButton = `<span class="remove-item" onclick="removeFromCart(this)">×</span>`;
 
-    // Formatação do conteúdo dependendo do tipo (bolo simples)
-    const itemData = {
-        boloNome,
-        recheio,
-        description,
-        total,
-    };
-
-    // Exibe os dados no carrinho
+    // Monta o conteúdo do item no carrinho
     item.innerHTML = `
         ${removeButton}
-        <span>${boloNome}</span>
-        <br> Recheio: ${recheio || "Não selecionado"}
-        <br> Comentário: ${description || "Nenhum Comentário"}
+        <span>${productName} ${quantidade > 1 ? `(x${quantidade})` : ''}</span>
+        ${recheio ? `<br> Recheio: ${recheio}` : ''}
+        ${description ? `<br> Tema: ${description}` : ''}
         <br> <strong class="item-price">R$ ${total.toFixed(2)}</strong>
     `;
 
-    // Adiciona o item ao carrinho
+    // Adiciona ao carrinho
     cartItemsContainer.appendChild(item);
 
-    // Fecha o modal após adicionar ao carrinho
-    closeModal(modalId);
-
-    // Atualiza o total
-    updateCartTotal();
-
-    // Limpa os campos de entrada do modal para o próximo item
-    resetModalFields();
-
-    // Armazenar dados do item no carrinho (pode ser usado na finalização)
+    // Armazena os dados do item
     if (!window.cartItems) {
         window.cartItems = [];
     }
-    window.cartItems.push(itemData);
-}
-
-
-
-
-
-
-// Função para adicionar ao carrinho (modal2)
-function addToCartModal2(productName, productPrice, modalId) {
-    // Captura o nome do bolo (nome do produto)
-    const boloNome = productName;
-
-    // Captura o recheio selecionado (apenas um)
-    const recheio = document.querySelector(`input[name="recheio"]:checked`)?.value;
-
-    // Captura o comentário do modal específico
-    const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
-
-    // O preço já vem embutido no valor do bolo
-    let total = productPrice;
-
-    // Criação do item a ser adicionado ao carrinho
-    const cartItemsContainer = document.getElementById("cart-items1");
-    const item = document.createElement("div");
-    item.classList.add("cart-item");
-
-    const removeButton = `<span class="remove-item" onclick="removeFromCart(this)">×</span>`;
-
-    // Formatação do conteúdo
-    const itemData = {
-        boloNome,
+    
+    window.cartItems.push({
+        productName,
+        productPrice,
+        quantidade,
         recheio,
         description,
-        total,
-    };
+        total
+    });
 
-    // Exibe os dados no carrinho
-    item.innerHTML = `
-        ${removeButton}
-        <span>${boloNome}</span>
-        <br> Recheio: ${recheio || "Não selecionado"}
-        <br> Comentário: ${description || "Nenhum Comentário"}
-        <br> <strong class="item-price">R$ ${total.toFixed(2)}</strong>
-    `;
+    // Atualiza o total do carrinho
+    updateCartTotal();
 
-    // Adiciona o item ao carrinho
-    cartItemsContainer.appendChild(item);
-
-    // Fecha o modal após adicionar ao carrinho
+    // Fecha o modal
     closeModal(modalId);
-
-    // Atualiza o total
-    updateCartTotal();
-
-    // Limpa os campos de entrada do modal para o próximo item
-    resetModalFields();
-
-    // Armazenar dados do item no carrinho (pode ser usado na finalização)
-    if (!window.cartItems) {
-        window.cartItems = [];
-    }
-    window.cartItems.push(itemData);
-}
-
-
-
-
-
-
-
-
-
-
-// Função para adicionar ao carrinho (modal3)
-function addToCartModal3(productName, productPrice, modalId) {
-    // Captura o nome do bolo (nome do produto)
-    const boloNome = productName;
-
-    // Captura o recheio selecionado (apenas um)
-    const recheio = document.querySelector(`input[name="recheio"]:checked`)?.value;
-
-    // Captura o comentário do modal específico
-    const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
-
-    // O preço já vem embutido no valor do bolo
-    let total = productPrice;
-
-    // Criação do item a ser adicionado ao carrinho
-    const cartItemsContainer = document.getElementById("cart-items1");
-    const item = document.createElement("div");
-    item.classList.add("cart-item");
-
-    const removeButton = `<span class="remove-item" onclick="removeFromCart(this)">×</span>`;
-
-    // Formatação do conteúdo
-    const itemData = {
-        boloNome,
-        recheio,
-        description,
-        total,
-    };
-
-    // Exibe os dados no carrinho
-    item.innerHTML = `
-        ${removeButton}
-        <span>${boloNome}</span>
-        <br> Recheio: ${recheio || "Não selecionado"}
-        <br> Comentário: ${description || "Nenhum Comentário"}
-        <br> <strong class="item-price">R$ ${total.toFixed(2)}</strong>
-    `;
-
-    // Adiciona o item ao carrinho
-    cartItemsContainer.appendChild(item);
-
-    // Fecha o modal após adicionar ao carrinho
-    closeModal(modalId);
-
-    // Atualiza o total
-    updateCartTotal();
-
-    // Limpa os campos de entrada do modal para o próximo item
-    resetModalFields();
-
-    // Armazenar dados do item no carrinho (pode ser usado na finalização)
-    if (!window.cartItems) {
-        window.cartItems = [];
-    }
-    window.cartItems.push(itemData);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Função para adicionar ao carrinho (modal4)
-function addToCartModal4(productName, productPrice, modalId) {
-    // Captura o nome do bolo (nome do produto)
-    const boloNome = productName;
-
-    // Captura o recheio selecionado (apenas um)
-    const recheio = document.querySelector(`input[name="recheio"]:checked`)?.value;
-
-    // Captura o comentário do modal específico
-    const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
-
-    // O preço já vem embutido no valor do bolo
-    let total = productPrice;
-
-    // Criação do item a ser adicionado ao carrinho
-    const cartItemsContainer = document.getElementById("cart-items1");
-    const item = document.createElement("div");
-    item.classList.add("cart-item");
-
-    const removeButton = `<span class="remove-item" onclick="removeFromCart(this)">×</span>`;
-
-    // Formatação do conteúdo
-    const itemData = {
-        boloNome,
-        recheio,
-        description,
-        total,
-    };
-
-    // Exibe os dados no carrinho
-    item.innerHTML = `
-        ${removeButton}
-        <span>${boloNome}</span>
-        <br> Recheio: ${recheio || "Não selecionado"}
-        <br> Comentário: ${description || "Nenhum Comentário"}
-        <br> <strong class="item-price">R$ ${total.toFixed(2)}</strong>
-    `;
-
-    // Adiciona o item ao carrinho
-    cartItemsContainer.appendChild(item);
-
-    // Fecha o modal após adicionar ao carrinho
-    closeModal(modalId);
-
-    // Atualiza o total
-    updateCartTotal();
-
-    // Limpa os campos de entrada do modal para o próximo item
-    resetModalFields();
-
-    // Armazenar dados do item no carrinho (pode ser usado na finalização)
-    if (!window.cartItems) {
-        window.cartItems = [];
-    }
-    window.cartItems.push(itemData);
-}
-
-
-
-
-
-
-
-
-
-// Função para adicionar ao carrinho (modal5)
-function addToCartModal5(productName, productPrice, modalId) {
-    // Captura o nome do bolo (nome do produto)
-    const boloNome = productName;
-
-    // Captura o recheio selecionado (apenas um)
-    const recheio = document.querySelector(`input[name="recheio"]:checked`)?.value;
-
-    // Captura o comentário do modal específico
-    const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
-
-    // O preço já vem embutido no valor do bolo
-    let total = productPrice;
-
-    // Criação do item a ser adicionado ao carrinho
-    const cartItemsContainer = document.getElementById("cart-items1");
-    const item = document.createElement("div");
-    item.classList.add("cart-item");
-
-    const removeButton = `<span class="remove-item" onclick="removeFromCart(this)">×</span>`;
-
-    // Formatação do conteúdo
-    const itemData = {
-        boloNome,
-        recheio,
-        description,
-        total,
-    };
-
-    // Exibe os dados no carrinho
-    item.innerHTML = `
-        ${removeButton}
-        <span>${boloNome}</span>
-        <br> Recheio: ${recheio || "Não selecionado"}
-        <br> Comentário: ${description || "Nenhum Comentário"}
-        <br> <strong class="item-price">R$ ${total.toFixed(2)}</strong>
-    `;
-
-    // Adiciona o item ao carrinho
-    cartItemsContainer.appendChild(item);
-
-    // Fecha o modal após adicionar ao carrinho
-    closeModal(modalId);
-
-    // Atualiza o total
-    updateCartTotal();
-
-    // Limpa os campos de entrada do modal para o próximo item
-    resetModalFields();
-
-    // Armazenar dados do item no carrinho (pode ser usado na finalização)
-    if (!window.cartItems) {
-        window.cartItems = [];
-    }
-    window.cartItems.push(itemData);
-}
-
-
-
-
-
-
-
-// Função para adicionar ao carrinho (modal6)
-function addToCartModal6(productName, productPrice, modalId) {
-    // Captura o nome do bolo (nome do produto)
-    const boloNome = productName;
-
-    // Captura o recheio selecionado (apenas um)
-    const recheio = document.querySelector(`input[name="recheio"]:checked`)?.value;
-
-    // Captura o comentário do modal específico
-    const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
-
-    // O preço já vem embutido no valor do bolo
-    let total = productPrice;
-
-    // Criação do item a ser adicionado ao carrinho
-    const cartItemsContainer = document.getElementById("cart-items1");
-    const item = document.createElement("div");
-    item.classList.add("cart-item");
-
-    const removeButton = `<span class="remove-item" onclick="removeFromCart(this)">×</span>`;
-
-    // Formatação do conteúdo
-    const itemData = {
-        boloNome,
-        recheio,
-        description,
-        total,
-    };
-
-    // Exibe os dados no carrinho
-    item.innerHTML = `
-        ${removeButton}
-        <span>${boloNome}</span>
-        <br> Recheio: ${recheio || "Não selecionado"}
-        <br> Comentário: ${description || "Nenhum Comentário"}
-        <br> <strong class="item-price">R$ ${total.toFixed(2)}</strong>
-    `;
-
-    // Adiciona o item ao carrinho
-    cartItemsContainer.appendChild(item);
-
-    // Fecha o modal após adicionar ao carrinho
-    closeModal(modalId);
-
-    // Atualiza o total
-    updateCartTotal();
-
-    // Limpa os campos de entrada do modal para o próximo item
-    resetModalFields();
-
-    // Armazenar dados do item no carrinho (pode ser usado na finalização)
-    if (!window.cartItems) {
-        window.cartItems = [];
-    }
-    window.cartItems.push(itemData);
-}
-
-
-
-
-
-
-
-
-// Função para remover item do carrinho
-function removeFromCart(button) {
-    const cartItemsContainer = document.getElementById("cart-items1");
-    const item = button.parentElement;
-    cartItemsContainer.removeChild(item);
-    updateCartTotal();
 }
 
 
 
 // Função para atualizar o total do carrinho
 function updateCartTotal() {
-    const cartItemsContainer = document.getElementById("cart-items1");
-    const cartItems = cartItemsContainer.getElementsByClassName("cart-item");
-
     let total = 0;
-    for (let i = 0; i < cartItems.length; i++) {
-        const price = parseFloat(cartItems[i].querySelector(".item-price").textContent.replace('R$', '').trim());
-        total += price;
+    
+    // Soma todos os itens do carrinho
+    if (window.cartItems && window.cartItems.length > 0) {
+        total = window.cartItems.reduce((sum, item) => sum + item.total, 0);
     }
 
+    // Atualiza o display
     document.getElementById("cart-total").textContent = `Total Do Pedido: R$ ${total.toFixed(2)}`;
+}
+
+function removeFromCart(element) {
+    const item = element.parentElement;
+    const itemIndex = Array.from(item.parentElement.children).indexOf(item);
+    
+    // Remove do array cartItems
+    if (window.cartItems && window.cartItems.length > itemIndex) {
+        window.cartItems.splice(itemIndex, 1);
+    }
+    
+    // Remove do DOM
+    item.remove();
+    
+    // Atualiza o total
+    updateCartTotal();
 }
 
 
@@ -506,91 +176,94 @@ function resetModalFields() {
 
 
 // Função para finalizar a compra e enviar para o WhatsApp
+// Função para finalizar a compra e enviar para o WhatsApp
 function finalizePurchase() {
     const name = document.getElementById("name").value;
     const phone = document.getElementById("celular").value;
     const address = document.getElementById("address").value;
     const payment = document.getElementById("payment").value;
 
+    // Verifica se os campos obrigatórios foram preenchidos
     if (!name || !phone || !address) {
         alert("Por favor, preencha todos os campos obrigatórios!");
         return;
     }
 
-    // Criação do cabeçalho da mensagem
-    let orderSummary = "Pedido Hamburgueria ComeCome!\n\n";
-    const orderId = Date.now(); // Gerado dinamicamente
-    const orderDate = new Date().toLocaleString(); // Data e hora atual
-    const deliveryTime = "50 - 70 minutos"; 
-    orderSummary += `Pedido: ${orderId} (${orderDate})\nTempo De Entrega: ${deliveryTime}\n------------------------------\n`;
+    // Verifica se há itens no carrinho
+    if (!window.cartItems || window.cartItems.length === 0) {
+        alert("Seu carrinho está vazio! Adicione itens antes de finalizar.");
+        return;
+    }
 
-    // Adiciona os dados do cliente
-    orderSummary += `Nome: ${name}\nCelular: ${phone}\nEndereço Completo: ${address}\nForma De Pagamento: ${payment}\n------------------------------\n`;
+    // Número da Renata Lira Bolos (fixo)
+    const renataPhone = "5521980882615";
+
+    // Criação da mensagem formatada
+    let message = "*PEDIDO RENATA LIRA BOLOS* \n\n";
+    message += `*Data:* ${new Date().toLocaleString()}\n`;
+    message += `*Cliente:* ${name}\n`;
+    message += `*Telefone:* ${phone}\n`;
+    message += `*Endereço:* ${address}\n`;
+    message += `*Pagamento:* ${payment}\n\n`;
+    message += "--------------------------------\n";
+    message += "*ITENS DO PEDIDO:*\n\n";
 
     // Adiciona os itens do carrinho
-    orderSummary += "Pedido:\n";
-    let totalAmount = 0;
-    window.cartItems.forEach(item => {
-        orderSummary += `-> ${item.productName}\n`;
-
-        if (item.isCombo) {
-            orderSummary += `Ponto da Carne 1: ${item.pontoCarne1 || "Não selecionado"}\nPonto da Carne 2: ${item.pontoCarne2 || "Não selecionado"}\n`;
-        } else if (item.isBeverage) {
-            orderSummary += `Bebida: ${item.bebida1 || "Não selecionado"}\n`;
-        } else {
-            orderSummary += `Ponto da Carne: ${item.pontoCarne1 || "Não selecionado"}\nAdicional: ${item.adicional || "Não selecionado"}\nAcompanhamento: ${item.acompanhamento || "Não selecionado"}\nBebida: ${item.bebida || "Não selecionado"}\n`;
-        }
-
-        orderSummary += `Comentário: ${item.description || "Nenhum Comentário"}\n`;
-        orderSummary += `R$ ${item.total.toFixed(2)}\n`;
-        totalAmount += item.total;
+    let total = 0;
+    window.cartItems.forEach((item, index) => {
+        message += `*${index + 1}. ${item.productName}*\n`;
+        if (item.quantidade > 1) message += `🔢 Quantidade: ${item.quantidade}\n`;
+        if (item.recheio) message += `Recheio: ${item.recheio}\n`;
+        if (item.description) message += `Tema/Detalhes: ${item.description}\n`;
+        message += `Valor: R$ ${item.total.toFixed(2)}\n\n`;
+        total += item.total;
     });
 
-    // Adiciona o total e a entrega
-    const deliveryFee = 4.00; // Exemplo de valor de entrega
-    const finalAmount = totalAmount + deliveryFee;
-    orderSummary += "------------------------------\n";
-    orderSummary += `Produtos: R$${totalAmount.toFixed(2)}\nEntrega: R$${deliveryFee.toFixed(2)}\n\n`;
-    orderSummary += `TOTAL: R$${finalAmount.toFixed(2)}\n\n`;
+    message += "--------------------------------\n";
+    message += `*TOTAL DO PEDIDO: R$ ${total.toFixed(2)}*\n\n`;
+    message += "Muito obrigado pelo pedido! \n";
+    message += "Seu pedido será preparado com todo carinho!\n";
+    message += "Qualquer dúvida, estamos à disposição! ";
 
-    // Mensagem de agradecimento
-    orderSummary += "Obrigado pela preferência, se precisar de algo é só chamar!";
+    // Codifica a mensagem para URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Cria o link do WhatsApp
+    const whatsappUrl = `https://wa.me/${renataPhone}?text=${encodedMessage}`;
 
-    // Envia o pedido para o WhatsApp do número fixo (55 21 96648-7406)
-    const whatsappMessage = encodeURIComponent(orderSummary);
-    const whatsappUrl = `https://wa.me/5521966487406?text=${whatsappMessage}`;
-
-    // Abre a conversa no WhatsApp
+    // Abre o WhatsApp
     window.open(whatsappUrl, '_blank');
 
-    // Limpar o carrinho após a finalização
+    // Limpa o carrinho
     document.getElementById("cart-items1").innerHTML = "";
-    updateCartTotal();
+    document.getElementById("cart-total").textContent = "Total Do Pedido: R$ 0.00";
     document.getElementById("name").value = "";
     document.getElementById("celular").value = "";
     document.getElementById("address").value = "";
+    window.cartItems = [];
 }
+
 
 
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button1").addEventListener("click", function() {
-    const productName = "I Love Cheddar";
-    const productPrice = 36.90;
+    const productName = "Bolo 15 fatias";
+    const productPrice = 110.00;
     addToCart(productName, productPrice);
 });
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button2").addEventListener("click", function() {
-    const productName = "Fake Mequi";
-    const productPrice = 42.90;
+    const productName = "Bolo 20 fatias";
+    const productPrice = 150.00;
     addToCart(productName, productPrice);
 });
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button3").addEventListener("click", function() {
-    const productName = "Monstruoso";
-    const productPrice = 48.90;
+    const productName = "Bolo 30 fatias";
+    const productPrice = 170.00;
     addToCart(productName, productPrice);
 });
 
@@ -603,56 +276,240 @@ document.getElementById("add-to-cart-button4").addEventListener("click", functio
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button5").addEventListener("click", function() {
-    const productName = "Combo Australiano Monstruoso";
-    const productPrice = 89.90;
+    const productName = "Bolo 40 fatias";
+    const productPrice = 190.00;
     addToCart(productName, productPrice);
 });
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button6").addEventListener("click", function() {
-    const productName = "Combo Fake Mequi";
-    const productPrice = 89.90;
+    const productName = "Bolo 50 fatias";
+    const productPrice = 210.00;
     addToCart(productName, productPrice);
 });
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button7").addEventListener("click", function() {
-    const productName = "Combo Clássico";
-    const productPrice = 84.90;
+    const productName = "Bolo 70 fatias";
+    const productPrice = 280.00;
     addToCart(productName, productPrice);
 });
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button8").addEventListener("click", function() {
-    const productName = "Combo Original";
-    const productPrice = 84.90;
+    const productName = "Docinhos Tradicionais";
+    const productPrice = 100.00;
     addToCart(productName, productPrice);
 });
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button9").addEventListener("click", function() {
-    const productName = "Combo Monstro";
-    const productPrice = 99.90;
+    const productName = "Docinhos Gourmet";
+    const productPrice = 130.00;
     addToCart(productName, productPrice);
 });
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button10").addEventListener("click", function() {
-    const productName = "Refringente Lata";
-    const productPrice = 7.90;
+    const productName = "Algodão";
+    const productPrice = 2.00;
     addToCart(productName, productPrice);
 });
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button11").addEventListener("click", function() {
-    const productName = "Refrigerante Garrafa";
-    const productPrice = 9.90;
+    const productName = "Maça Do Amor";
+    const productPrice = 2.50;
     addToCart(productName, productPrice);
 });
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button12").addEventListener("click", function() {
-    const productName = "Água Mineral";
+    const productName = "Pirulito";
+    const productPrice = 3.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button13").addEventListener("click", function() {
+    const productName = "Pipoca";
+    const productPrice = 3.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button14").addEventListener("click", function() {
+    const productName = "Cupcake De Chantilly";
+    const productPrice = 5.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button15").addEventListener("click", function() {
+    const productName = "Donuts";
+    const productPrice = 1.50;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button16").addEventListener("click", function() {
+    const productName = "Donuts";
+    const productPrice = 1.50;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button17").addEventListener("click", function() {
+    const productName = "Pirulito de Pasta Americana";
+    const productPrice = 5.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button18").addEventListener("click", function() {
+    const productName = "Cupcake";
+    const productPrice = 8.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button19").addEventListener("click", function() {
+    const productName = "Bolo no palito (papel)";
+    const productPrice = 8.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button20").addEventListener("click", function() {
+    const productName = "Bolo do palito Pasta americana (simples)";
+    const productPrice = 10.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button21").addEventListener("click", function() {
+    const productName = "Bolo no palito pasta americana (personagens)";
+    const productPrice = 12.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button22").addEventListener("click", function() {
+    const productName = "Cone trufado";
+    const productPrice = 10.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button23").addEventListener("click", function() {
+    const productName = "Trufa";
     const productPrice = 4.00;
     addToCart(productName, productPrice);
 });
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button24").addEventListener("click", function() {
+    const productName = "Alfajor";
+    const productPrice = 5.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button25").addEventListener("click", function() {
+    const productName = "Chocomaça";
+    const productPrice = 12.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button26").addEventListener("click", function() {
+    const productName = "Verrines";
+    const productPrice = 6.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button27").addEventListener("click", function() {
+    const productName = "Taça luxuosa";
+    const productPrice = 12.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button28").addEventListener("click", function() {
+    const productName = "Kit mêsversario luxo";
+    const productPrice = 200.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button29").addEventListener("click", function() {
+    const productName = "Kit festa Premium";
+    const productPrice = 290.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button30").addEventListener("click", function() {
+    const productName = "Kit doces luxo";
+    const productPrice = 490.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button31").addEventListener("click", function() {
+    const productName = "Kit 1";
+    const productPrice = 100.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button32").addEventListener("click", function() {
+    const productName = "Kit 2";
+    const productPrice = 120.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button33").addEventListener("click", function() {
+    const productName = "Kit 3";
+    const productPrice = 140.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button34").addEventListener("click", function() {
+    const productName = "Kit 4";
+    const productPrice = 160.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button35").addEventListener("click", function() {
+    const productName = "Kit 5";
+    const productPrice = 180.00;
+    addToCart(productName, productPrice);
+});
+
+// Função para fechar o modal e restaurar o scroll
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+
+    // Garante que o body possa rolar novamente
+    document.body.style.overflow = "auto";
+
+    // Garante que a página mantenha o foco correto
+    setTimeout(() => {
+        document.body.focus();
+    }, 100);
+}
+
+
+
+
+
+function atualizarPreco(precoUnitario, quantidadeId, totalId) {
+    const quantidade = document.getElementById(quantidadeId).value;
+    const total = precoUnitario * quantidade;
+    document.getElementById(totalId).textContent = total.toFixed(2);
+}
