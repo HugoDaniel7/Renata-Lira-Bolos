@@ -5,7 +5,8 @@
 
 body {
     font-family: "roboto mono", sans-serif;
-    background: linear-gradient(135deg, #ffffff, #ffb3f0, #f8bcf3);
+    background-image: url('img/fundonovo.jpg');
+    background-repeat: repeat; /* Repete em ambas as direções */
     background-repeat: repeat; /* Faz a imagem se repetir */
     background-size: auto; /* Mantém o tamanho original da imagem */
     background-position: top left; /* Começa a repetição do topo esquerdo */    color: #000000;
@@ -27,7 +28,7 @@ header {
     display: flex; 
     align-items: center; 
     justify-content: space-between;
-    background-color: #ff00ea;
+    background-color: #bd3b69;
     color: #fff;
     position: fixed; /* Torna a navbar fixa */
     top: 0; /* Fixa a navbar no topo */
@@ -425,7 +426,7 @@ button:hover {
 /* Adiciona estilo para o rodapé do projeto */
 
 footer {
-    background-color: #ff00ea;
+    background-color: #bd3b69;
     color: #fff;
     margin-top: auto;
     text-align: center;
