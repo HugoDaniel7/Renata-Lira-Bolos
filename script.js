@@ -62,24 +62,38 @@ function addToCart(productName, productPrice, modalId) {
     const quantidadeInput = document.querySelector(`#${modalId} input[type="number"]`);
     const quantidade = quantidadeInput ? parseInt(quantidadeInput.value) || 1 : 1;
     
-    // Calcula o total considerando a quantidade
-    const total = productPrice * quantidade;
-
     // Captura o recheio selecionado (se existir)
     const recheio = document.querySelector(`#${modalId} input[name="recheio"]:checked`)?.value;
 
+    // Lista de opções que devem ter metade do preço
+    const opcoesComMetadePreco = [
+        "50 Docinhos de Beijinho",
+        "50 Docinhos de Brigadeiro",
+        "25 Docinhos de Beijinho e 25 Docinhos de Brigadeiro"
+    ];
+
+    // Ajusta o preço se for uma das opções especiais
+    let total = productPrice;
+    if (opcoesComMetadePreco.includes(recheio)) {
+        total = productPrice / 2; // Metade do preço para essas opções
+    }
+
+    // Calcula o total considerando a quantidade
+    total = total * quantidade;
+
+    // Restante da função permanece igual...
     // Captura a descrição/tema (se existir)
     const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
 
     // Mostra mensagem de confirmação centralizada
     Swal.fire({
-        position: 'center', // Centraliza o alerta
+        position: 'center',
         icon: 'success',
         title: 'Item adicionado ao carrinho!',
         showConfirmButton: false,
         timer: 1500,
         customClass: {
-            popup: 'custom-swal' // Adiciona uma classe personalizada para estilização extra
+            popup: 'custom-swal'
         }
     });
 
@@ -109,7 +123,7 @@ function addToCart(productName, productPrice, modalId) {
     
     window.cartItems.push({
         productName,
-        productPrice,
+        productPrice: opcoesComMetadePreco.includes(recheio) ? productPrice / 2 : productPrice,
         quantidade,
         recheio,
         description,
