@@ -1151,3 +1151,116 @@ footer {
 
 
 
+
+
+
+
+/* Estilo para os campos de data e horário */
+input[type="date"], 
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Garante que o calendário não apareça cortado no modal */
+.modal-content1 {
+    overflow: visible;
+}
+
+/* Ajusta o tamanho do modal para acomodar os novos campos */
+.modal-content1 {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+
+
+
+/* Estilo para a observação dos 50% */
+.deposit-notice {
+    background-color: #fff8e1;
+    border-left: 4px solid #ffc107;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 14px; /* Tamanho padrão para desktop */
+}
+
+.deposit-notice p {
+    margin: 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.deposit-notice strong {
+    color: #d32f2f;
+}
+
+
+
+/* Media query para dispositivos móveis */
+@media only screen and (max-width: 768px) {
+    .deposit-notice {
+        font-size: 12px; /* Tamanho reduzido para mobile */
+        padding: 8px 12px; /* Padding menor para economizar espaço */
+    }
+    
+
+
+
+
+
+
+    #carrinho {
+        position: relative;
+    }
+    
+    #cart-count {
+        position: absolute;
+        top: -5px;  /* Reduzi de -10px para -5px (fica mais próximo) */
+        right: 10px; /* Reduzi de -10px para -5px (fica mais próximo) */
+        background-color: #ff6b6b;
+        color: white;
+        border-radius: 50%;
+        padding: 1px 5px; /* Reduzi o padding para ficar mais compacto */
+        font-size: 11px;  /* Fonte um pouco menor */
+        display: none; /* Começa escondido */
+        line-height: 1.2; /* Melhora o alinhamento vertical do número */
+    }
+
+    
+}
+
+
+/* Estilo personalizado para o SweetAlert */
+.custom-swal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swal2-popup {
+    margin: 0 !important;
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+
+#cart-count {
+    position: absolute;
+    margin-top: -3%;  /* Reduzi de -10px para -5px (fica mais próximo) */
+    margin-right: -80%;
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 50%;
+    padding: 1px 5px; /* Reduzi o padding para ficar mais compacto */
+    font-size: 11px;  /* Fonte um pouco menor */
+    display: none; /* Começa escondido */
+    line-height: 1.2; /* Melhora o alinhamento vertical do número */
+}

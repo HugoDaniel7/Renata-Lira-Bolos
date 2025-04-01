@@ -36,9 +36,6 @@ function closeModal(modalId) {
 }
 
 
-
-
-
 // Função para abrir o modal de carrinho
 function openModal1(modalId) {
     document.getElementById(modalId).style.display = 'flex';
@@ -60,9 +57,6 @@ window.onclick = function(event) {
 }
 
 
-
-
-// Função para adicionar ao carrinho
 function addToCart(productName, productPrice, modalId) {
     // Captura a quantidade (se existir no modal)
     const quantidadeInput = document.querySelector(`#${modalId} input[type="number"]`);
@@ -76,6 +70,18 @@ function addToCart(productName, productPrice, modalId) {
 
     // Captura a descrição/tema (se existir)
     const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
+
+    // Mostra mensagem de confirmação centralizada
+    Swal.fire({
+        position: 'center', // Centraliza o alerta
+        icon: 'success',
+        title: 'Item adicionado ao carrinho!',
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+            popup: 'custom-swal' // Adiciona uma classe personalizada para estilização extra
+        }
+    });
 
     // Criação do item no carrinho
     const cartItemsContainer = document.getElementById("cart-items1");
@@ -112,12 +118,44 @@ function addToCart(productName, productPrice, modalId) {
 
     // Atualiza o total do carrinho
     updateCartTotal();
+    
+    // Atualiza o contador do carrinho
+    updateCartCount();
 
     // Fecha o modal
     closeModal(modalId);
 }
 
+function updateCartCount() {
+    const count = window.cartItems ? window.cartItems.reduce((sum, item) => sum + item.quantidade, 0) : 0;
+    document.getElementById('cart-count').textContent = count;
+    
+    // Opcional: esconder o contador se estiver zero
+    const cartCount = document.getElementById('cart-count');
+    if (count === 0) {
+        cartCount.style.display = 'none';
+    } else {
+        cartCount.style.display = 'block';
+    }
+}
 
+// Modifique a função removeFromCart para atualizar o contador também
+function removeFromCart(element) {
+    const item = element.parentElement;
+    const itemIndex = Array.from(item.parentElement.children).indexOf(item);
+    
+    // Remove do array cartItems
+    if (window.cartItems && window.cartItems.length > itemIndex) {
+        window.cartItems.splice(itemIndex, 1);
+    }
+    
+    // Remove do DOM
+    item.remove();
+    
+    // Atualiza o total e o contador
+    updateCartTotal();
+    updateCartCount();
+}
 
 // Função para atualizar o total do carrinho
 function updateCartTotal() {
@@ -144,12 +182,36 @@ function removeFromCart(element) {
     // Remove do DOM
     item.remove();
     
-    // Atualiza o total
+    // Atualiza o total e o contador
     updateCartTotal();
+    updateCartCount();
+    
+    // Mostra mensagem diferente se foi o último item
+    if (window.cartItems.length === 0) {
+        Swal.fire({
+            position: 'center',
+            icon: 'info',
+            title: 'Carrinho vazio!',
+            text: 'O último item foi removido',
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'custom-swal'
+            }
+        });
+    } else {
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Item removido do carrinho!',
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'custom-swal'
+            }
+        });
+    }
 }
-
-
-
 
 // Função para limpar os campos de entrada do modal após adicionar um item
 function resetModalFields() {
@@ -159,17 +221,17 @@ function resetModalFields() {
 }
 
 
-
-// Função para finalizar a compra e enviar para o WhatsApp
 // Função para finalizar a compra e enviar para o WhatsApp
 function finalizePurchase() {
     const name = document.getElementById("name").value;
     const phone = document.getElementById("celular").value;
     const address = document.getElementById("address").value;
     const payment = document.getElementById("payment").value;
+    const deliveryDate = document.getElementById("delivery-date").value;
+    const deliveryTime = document.getElementById("delivery-time").value;
 
     // Verifica se os campos obrigatórios foram preenchidos
-    if (!name || !phone || !address) {
+    if (!name || !phone || !address || !deliveryDate || !deliveryTime) {
         alert("Por favor, preencha todos os campos obrigatórios!");
         return;
     }
@@ -180,12 +242,17 @@ function finalizePurchase() {
         return;
     }
 
+    // Formata a data para exibição
+    const formattedDate = new Date(deliveryDate).toLocaleDateString('pt-BR');
+
     // Número da Renata Lira Bolos (fixo)
     const renataPhone = "5521980882615";
 
     // Criação da mensagem formatada
     let message = "*PEDIDO RENATA LIRA BOLOS* \n\n";
-    message += `*Data:* ${new Date().toLocaleString()}\n`;
+    message += `*Data do Pedido:* ${new Date().toLocaleString()}\n`;
+    message += `*Data de Entrega:* ${formattedDate}\n`;
+    message += `*Horário de Entrega:* ${deliveryTime}\n\n`;
     message += `*Cliente:* ${name}\n`;
     message += `*Telefone:* ${phone}\n`;
     message += `*Endereço:* ${address}\n`;
@@ -208,7 +275,9 @@ function finalizePurchase() {
     message += `*TOTAL DO PEDIDO: R$ ${total.toFixed(2)}*\n\n`;
     message += "Muito obrigado pelo pedido! \n";
     message += "Seu pedido será preparado com todo carinho!\n";
-    message += "Qualquer dúvida, estamos à disposição! ";
+    message += "Qualquer dúvida, estamos à disposição! \n";
+    message += "O pedido só é feito mediante um pagamento à vista de 50% do valor. Aceitamos transferências, pix, cartão de crédito via link de pagamento. ";
+
 
     // Codifica a mensagem para URL
     const encodedMessage = encodeURIComponent(message);
@@ -219,17 +288,33 @@ function finalizePurchase() {
     // Abre o WhatsApp
     window.open(whatsappUrl, '_blank');
 
-    // Limpa o carrinho
+    // Limpa o carrinho e os campos
     document.getElementById("cart-items1").innerHTML = "";
     document.getElementById("cart-total").textContent = "Total Do Pedido: R$ 0.00";
     document.getElementById("name").value = "";
     document.getElementById("celular").value = "";
     document.getElementById("address").value = "";
+    document.getElementById("delivery-date").value = "";
+    document.getElementById("delivery-time").value = "";
     window.cartItems = [];
+
+    // Atualiza o contador para zero
+    updateCartCount();
 }
 
 
-
+document.addEventListener('DOMContentLoaded', function() {
+    // Configura a data mínima como hoje
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    const minDate = yyyy + '-' + mm + '-' + dd;
+    document.getElementById('delivery-date').min = minDate;
+    
+    // Inicializa o contador do carrinho
+    updateCartCount();
+});
 
 // Adicionar o produto ao carrinho ao clicar no botão
 document.getElementById("add-to-cart-button1").addEventListener("click", function() {
@@ -476,6 +561,27 @@ document.getElementById("add-to-cart-button35").addEventListener("click", functi
     addToCart(productName, productPrice);
 });
 
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button35")?.addEventListener("click", function() {
+    const productName = "Bolo de Corte";
+    const productPrice = 4.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button36")?.addEventListener("click", function() {
+    const productName = "Smash Cake Simples";
+    const productPrice = 45.00;
+    addToCart(productName, productPrice);
+});
+
+// Adicionar o produto ao carrinho ao clicar no botão
+document.getElementById("add-to-cart-button37")?.addEventListener("click", function() {
+    const productName = "Smash Cake com Topo 3D";
+    const productPrice = 55.00;
+    addToCart(productName, productPrice);
+});
+
 // Função para fechar o modal e restaurar o scroll
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
@@ -490,9 +596,6 @@ function closeModal(modalId) {
 }
 
 
-
-
-
 function atualizarPreco(precoUnitario, quantidadeId, totalId) {
     const quantidade = document.getElementById(quantidadeId).value;
     const total = precoUnitario * quantidade;
@@ -500,6 +603,26 @@ function atualizarPreco(precoUnitario, quantidadeId, totalId) {
 }
 
 
+// Configura a data mínima como hoje
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Janeiro é 0!
+    const yyyy = today.getFullYear();
+    const minDate = yyyy + '-' + mm + '-' + dd;
+    
+    document.getElementById('delivery-date').min = minDate;
+});
 
 
-
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializa o carrinho
+    if (!window.cartItems) {
+        window.cartItems = [];
+    }
+    
+    // Atualiza o contador (isso vai mostrar se houver itens)
+    updateCartCount();
+    
+    // Restante do seu código...
+});

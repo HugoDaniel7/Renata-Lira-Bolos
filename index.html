@@ -27,6 +27,8 @@
 
     <!--Link do jquery-->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <!--Nome da pagina-->
     <title>Renata Lira Bolos</title>
@@ -43,7 +45,10 @@
         <h1 id="txtheader">Renata Lira Bolos</h1>
 
         <div id="carrinho">
-            <a onclick="openModal1('modal100')"><i class="bi bi-cart"></i></a>
+            <a onclick="openModal1('modal100')">
+                <i class="bi bi-cart"></i>
+                <span id="cart-count">0</span>
+            </a>
         </div>
 
     </header>
@@ -59,7 +64,7 @@
               <div class="product-card" onclick="openModal('modal1')">
                 <div class="product-info">
                   <h3 name="boloo">Bolo 15 fatias</h3>
-                  <p>Delicie-se com o incrível Bolo de 15 fatias da Renata Lira Bolos!</p>
+                  <p>Delicie-se com o incrível Bolo de 15 fatias.</p>
                   <strong>R$ 110,00</strong>
                 </div>
                 <img src="img/15fatiass.jpg">
@@ -68,7 +73,7 @@
               <div class="product-card" onclick="openModal('modal2')">
                 <div class="product-info">
                   <h3>Bolo 20 fatias</h3>
-                  <p>Delicie-se com o incrível Bolo de 20 fatias da Renata Lira Bolos!</p>
+                  <p>Delicie-se com o incrível Bolo de 20 fatias.</p>
                   <strong>R$ 150,00</strong>
                 </div>
                 <img src="img/20fatias.jpg">
@@ -76,7 +81,7 @@
               <div class="product-card" onclick="openModal('modal3')">
                 <div class="product-info">
                   <h3>Bolo 30 fatias</h3>
-                  <p>Delicie-se com o incrível Bolo de 30 fatias da Renata Lira Bolos!</p>
+                  <p>Delicie-se com o incrível Bolo de 30 fatias.</p>
                   <strong>R$ 170,00</strong>
                 </div>
                 <img src="img/30fatias.jpg">
@@ -90,7 +95,7 @@
                 <div class="product-card" onclick="openModal('modal4')">
                   <div class="product-info">
                     <h3>Bolo 40 fatias</h3>
-                    <p>Delicie-se com o incrível Bolo de 40 fatias da Renata Lira Bolos!</p>
+                    <p>Delicie-se com o incrível Bolo de 40 fatias.</p>
                     <strong>R$ 190,00</strong>
                   </div>
                   <img src="img/40fatias.jpg">
@@ -99,7 +104,7 @@
                 <div class="product-card" onclick="openModal('modal5')">
                   <div class="product-info">
                     <h3>Bolo 50 fatias</h3>
-                    <p>Delicie-se com o incrível Bolo de 50 fatias da Renata Lira Bolos!</p>
+                    <p>Delicie-se com o incrível Bolo de 50 fatias.</p>
                     <strong>R$ 210,00</strong>
                   </div>
                   <img src="img/50fatias.jpg">
@@ -107,13 +112,43 @@
                 <div class="product-card" onclick="openModal('modal6')">
                   <div class="product-info">
                     <h3>Bolo 70 fatias (dois andares)</h3>
-                    <p>Delicie-se com o incrível Bolo de 70 fatias da Renata Lira Bolos!</p>
+                    <p>Delicie-se com o incrível Bolo de 70 fatias.</p>
                     <strong>R$ 280,00</strong>
                   </div>
                   <img src="img/70fatias.jpg">
                 </div>
                 
               </div>
+
+              <!-- NOVOS PRODUTOS ADICIONADOS AQUI -->
+            <div class="product-grid">
+                <div class="product-card" onclick="openModal('modal35')">
+                <div class="product-info">
+                    <h3>Bolo de Corte</h3>
+                    <p>Delicie-se com o incrível Bolo de corte.</p>
+                    <strong>R$ 4,00 por fatia</strong>
+                </div>
+                <img src="img/bolocorte (1).jpg">
+            </div>
+        
+                <div class="product-card" onclick="openModal('modal36')">
+                <div class="product-info">
+                    <h3>Smash Cake Simples</h3>
+                    <p>Delicie-se com o incrível Smash Cake Simples, bolo pequeno para fotos de bebê.</p>
+                    <strong>R$ 45,00</strong>
+                </div>
+                <img src="img/smashsimples (1).jpg">
+            </div>
+                
+                <div class="product-card" onclick="openModal('modal37')">
+                <div class="product-info">
+                    <h3>Smash Cake com Topo 3D</h3>
+                    <p>Delicie-se com o incrível Smash Cake com Topo 3D, bolo pequeno para fotos de bebê.</p>
+                    <strong>R$ 55,00</strong>
+                </div>
+                <img src="img/smash3d (1).jpg">
+            </div>
+            </div>
 
 
           </section>
@@ -124,7 +159,7 @@
               <div class="product-card" onclick="openModal('modal7')">
                 <div class="product-info">
                   <h3>Docinhos Tradicionais</h3>
-                  <p>Delicie-se com 100 unidades dos docinhos tradicionais da Renata Lira Bolos!</p>
+                  <p>Delicie-se com 100 unidades dos docinhos tradicionais.</p>
                   <strong>R$ 100,00</strong>
                 </div>
                 <img src="img/docinho-tradicionall.jpg">
@@ -133,7 +168,7 @@
               <div class="product-card"  onclick="openModal('modal8')">
                 <div class="product-info">
                   <h3>Docinhos Gourmet</h3>
-                  <p>Delicie-se com 100 unidades dos docinhos gourmet da Renata Lira Bolos!</p>
+                  <p>Delicie-se com 100 unidades dos docinhos gourmet.</p>
                   <strong>R$ 130,00</strong>
                 </div>
                 <img src="img/docinho gourmett.jpg">
@@ -150,26 +185,26 @@
               <div class="product-card" onclick="openModal('modal9')">
                 <div class="product-info">
                   <h3>Algodão</h3>
-                  <p>Delicie-se com unidades de Algodão dos docinhos tradicionais da Renata Lira Bolos!</p>
+                  <p>Delicie-se com unidades de Algodão dos docinhos tradicionais.</p>
                   <strong>R$ 2,00</strong>
                 </div>
-                <img src="img/docinho-tradicionall.jpg">
+                <img src="img/algodao (1).jpg">
               </div>
               <div class="product-card"  onclick="openModal('modal10')">
                 <div class="product-info">
                   <h3>Maçã do Amor</h3>
-                  <p>Delicie-se com unidades de Maçã do Amor dos docinhos tradicionais da Renata Lira Bolos!</p>
+                  <p>Delicie-se com unidades de Maçã do Amor dos docinhos tradicionais.</p>
                   <strong>R$ 2,50</strong>
                 </div>
-                <img src="img/docinho-tradicionall.jpg">
+                <img src="img/macadoamor (1).jpg">
               </div>
               <div class="product-card"  onclick="openModal('modal11')">
                 <div class="product-info">
                   <h3>Pirulito</h3>
-                  <p>Delicie-se com unidades de Pirulito dos docinhos tradicionais da Renata Lira Bolos!</p>
+                  <p>Delicie-se com unidades de Pirulito dos docinhos tradicionais.</p>
                   <strong>R$ 3,00</strong>
                 </div>
-                <img src="img/docinho gourmett.jpg">
+                <img src="img/pirulito (1).jpg">
               </div>
             </div>
 
@@ -179,26 +214,26 @@
                 <div class="product-card" onclick="openModal('modal12')">
                   <div class="product-info">
                     <h3>Pipoca</h3>
-                    <p>Delicie-se com unidades de Pipoca dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Pipoca dos docinhos tradicionais.</p>
                     <strong>R$ 3,00</strong>
                   </div>
-                  <img src="img/docinho-tradicionall.jpg">
+                  <img src="img/pipoca (1).jpg">
                 </div>
                 <div class="product-card"  onclick="openModal('modal1000')">
                   <div class="product-info">
                     <h3>Cupcake de chantilly</h3>
-                    <p>Delicie-se com unidades de Cupcake de chantilly dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Cupcake de chantilly dos docinhos tradicionais.</p>
                     <strong>R$ 5,00</strong>
                   </div>
-                  <img src="img/docinho-tradicionall.jpg">
+                  <img src="img/cupcakecomchantilly (1).jpg">
                 </div>
                 <div class="product-card"  onclick="openModal('modal15')">
                   <div class="product-info">
                     <h3>Donuts</h3>
-                    <p>Delicie-se com unidades de Donuts dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Donuts dos docinhos tradicionais.</p>
                     <strong>R$ 1,50</strong>
                   </div>
-                  <img src="img/docinho gourmett.jpg">
+                  <img src="img/donuts (1).jpg">
                 </div>
               </div>
             
@@ -211,26 +246,26 @@
               <div class="product-card"  onclick="openModal('modal16')">
                 <div class="product-info">
                   <h3>Pirulito de Pasta Americana</h3>
-                  <p>Delicie-se com unidades de Brigadeiro dos docinhos tradicionais da Renata Lira Bolos!</p>
+                  <p>Delicie-se com unidades de Pirulitos de Pasta Americana dos docinhos tradicionais.</p>
                   <strong>R$ 5,00</strong>
                 </div>
-                <img src="img/docinho gourmett.jpg">
+                <img src="img/pirulitopasta (1).jpg">
             </div>
               <div class="product-card"  onclick="openModal('modal17')">
                 <div class="product-info">
-                  <h3>Cupcake</h3>
-                  <p>Delicie-se com unidades de Beijinho dos docinhos tradicionais da Renata Lira Bolos!</p>
+                  <h3>Cupcake de pasta americana</h3>
+                  <p>Delicie-se com unidades de Cupcakes dos docinhos tradicionais.</p>
                   <strong>R$ 8,00</strong>
                 </div>
-                <img src="img/docinho gourmett.jpg">
+                <img src="img/cupcake pasta americana (1).jpg">
             </div>
               <div class="product-card"  onclick="openModal('modal18')">
                 <div class="product-info">
                   <h3>Bolo no palito (papel)</h3>
-                  <p>Delicie-se com unidades de Quindim dos docinhos tradicionais da Renata Lira Bolos!</p>
+                  <p>Delicie-se com unidades de Bolos no palito (papel) dos docinhos tradicionais.</p>
                   <strong>R$ 8,00</strong>
                 </div>
-                <img src="img/docinho gourmett.jpg">
+                <img src="img/bolo no palito (1).jpg">
             </div>
             </div>
 
@@ -241,26 +276,26 @@
                 <div class="product-card"  onclick="openModal('modal19')">
                   <div class="product-info">
                     <h3>Bolo do palito Pasta americana (simples)</h3>
-                    <p>Delicie-se com unidades de Brigadeiro dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Bolo do palito Pasta americana (simples) dos docinhos tradicionais.</p>
                     <strong>R$ 10,00</strong>
                   </div>
-                  <img src="img/docinho gourmett.jpg">
+                  <img src="img/bolo no palito pasta americana simples (1).jpg">
               </div>
                 <div class="product-card"  onclick="openModal('modal20')">
                   <div class="product-info">
                     <h3>Bolo no palito pasta americana (personagens)</h3>
-                    <p>Delicie-se com unidades de Beijinho dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Bolo no palito pasta americana (personagens) dos docinhos tradicionais.</p>
                     <strong>R$ 12,00</strong>
                   </div>
-                  <img src="img/docinho gourmett.jpg">
+                  <img src="img/bolo no palito personagens (1).jpg">
               </div>
                 <div class="product-card"  onclick="openModal('modal21')">
                   <div class="product-info">
                     <h3>Cone trufado</h3>
-                    <p>Delicie-se com unidades de Quindim dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Cone trufado dos docinhos tradicionais.</p>
                     <strong>R$ 10,00</strong>
                   </div>
-                  <img src="img/docinho gourmett.jpg">
+                  <img src="img/cone trufado (1).jpg">
               </div>
             </div>
 
@@ -270,26 +305,26 @@
                 <div class="product-card"  onclick="openModal('modal22')">
                   <div class="product-info">
                     <h3>Trufa</h3>
-                    <p>Delicie-se com unidades de Brigadeiro dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Trufa dos docinhos tradicionais.</p>
                     <strong>R$ 4,00</strong>
                   </div>
-                  <img src="img/docinho gourmett.jpg">
+                  <img src="img/trufa (1).jpg">
               </div>
                 <div class="product-card"  onclick="openModal('modal23')">
                   <div class="product-info">
                     <h3>Alfajor</h3>
-                    <p>Delicie-se com unidades de Beijinho dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Alfajor dos docinhos tradicionais.</p>
                     <strong>R$ 5,00</strong>
                   </div>
-                  <img src="img/docinho gourmett.jpg">
+                  <img src="img/alfajor (1).jpg">
               </div>
                 <div class="product-card"  onclick="openModal('modal24')">
                   <div class="product-info">
-                    <h3>Chocomaça </h3>
-                    <p>Delicie-se com unidades de Quindim dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <h3>Chocomaçã </h3>
+                    <p>Delicie-se com unidades de Chocomaçã dos docinhos tradicionais.</p>
                     <strong>R$ 12,00</strong>
                   </div>
-                  <img src="img/docinho gourmett.jpg">
+                  <img src="img/chocomaça (1).jpg">
               </div>
             </div>
 
@@ -297,18 +332,18 @@
                 <div class="product-card"  onclick="openModal('modal25')">
                   <div class="product-info">
                     <h3>Verrines</h3>
-                    <p>Delicie-se com unidades de Brigadeiro dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Verrines dos docinhos tradicionais.</p>
                     <strong>A partir de R$ 6,00</strong>
                   </div>
-                  <img src="img/docinho gourmett.jpg">
+                  <img src="img/verrine (1).jpg">
               </div>
                 <div class="product-card"  onclick="openModal('modal26')">
                   <div class="product-info">
                     <h3>Taça luxuosa</h3>
-                    <p>Delicie-se com unidades de Beijinho dos docinhos tradicionais da Renata Lira Bolos!</p>
+                    <p>Delicie-se com unidades de Taça luxuosa dos docinhos tradicionais.</p>
                     <strong>R$ 12,00</strong>
                   </div>
-                  <img src="img/docinho gourmett.jpg">
+                  <img src="img/taça luxuosa (1).jpg">
               </div>
             </div>
 
@@ -325,7 +360,10 @@
                 <div class="product-card" onclick="openModal('modal27')">
                   <div class="product-info">
                     <h3>Kit mêsversario luxo</h3>
-                    <p>1 bolo 15 fatias, 5 bolo no palito, 5 trufas e 5 cupcakes.</p>
+                    <p>1 bolo 15 fatias
+                       <br>5 bolo no palito
+                       <br>5 trufas
+                       <br>5 cupcakes</p>
                     <strong>R$ 200,00</strong>
                   </div>
                   <img src="img/Kit mêsversario luxo (1).jpg">
@@ -333,7 +371,7 @@
               <div class="product-card"  onclick="openModal('modal28')">
                 <div class="product-info">
                   <h3>Kit festa Premium</h3>
-                  <p>1 bolo 30 fatias, 10 cupcakes, 30 docinhos, 25 donuts e 10 pirulitos.</p>
+                  <p>1 bolo 30 fatias<br>10 cupcakes<br>30 docinhos<br>25 donuts<br>10 pirulitos</p>
                   <strong>R$ 290,00</strong>
                 </div>
                 <img src="img/Kit festa Premium (1).jpg">
@@ -341,7 +379,7 @@
               <div class="product-card"  onclick="openModal('modal29')">
                 <div class="product-info">
                   <h3>Kit doces luxo</h3>
-                  <p>10 bolo no palito, 10 trufas, 10 alfachor, 10 cones, 10 pirulitos, 10 cupcakes</p>
+                  <p>10 bolo no palito<br>10 trufas<br>10 alfachor<br>10 cones<br>10 pirulitos<br>10 cupcakes</p>
                   <strong>R$ 490,00</strong>
                 </div>
                 <img src="img/kit doces luxo (1).jpg">
@@ -354,7 +392,7 @@
                 <div class="product-card" onclick="openModal('modal30')">
                   <div class="product-info">
                     <h3>Kit 1</h3>
-                    <p>10 Pirulitos de chocolate, 10 maçãs, 10 algodões, 10 pipocas.</p>
+                    <p>10 Pirulitos de chocolate<br>10 maçãs<br>10 algodões<br>10 pipocas</p>
                     <strong>R$ 100,00</strong>
                   </div>
                   <img src="img/docinho-tradicionall.jpg">
@@ -362,7 +400,7 @@
                 <div class="product-card"  onclick="openModal('modal31')">
                   <div class="product-info">
                     <h3>Kit 2</h3>
-                    <p>15 Pirulitos de chocolate, 15 maçãs, 15 algodões, 15 pipocas.</p>
+                    <p>15 Pirulitos de chocolate<br>15 maçãs<br>15 algodões<br>15 pipocas</p>
                     <strong>R$ 120,00</strong>
                   </div>
                   <img src="img/docinho-tradicionall.jpg">
@@ -370,7 +408,7 @@
                 <div class="product-card"  onclick="openModal('modal32')">
                   <div class="product-info">
                     <h3>Kit 3</h3>
-                    <p>20 Pirulitos de chocolate, 20 maçãs, 20 algodões, 20 pipocas.</p>
+                    <p>20 Pirulitos de chocolate<br>20 maçãs<br>20 algodões<br>20 pipocas</p>
                     <strong>R$ 140,00</strong>
                   </div>
                   <img src="img/docinho gourmett.jpg">
@@ -385,7 +423,7 @@
                 <div class="product-card" onclick="openModal('modal33')">
                   <div class="product-info">
                     <h3>Kit 4</h3>
-                    <p>30 Pirulitos de chocolate, 30 maçãs, 30 algodões, 30 pipocas.</p>
+                    <p>30 Pirulitos de chocolate<br>30 maçãs<br>30 algodões<br>30 pipocas</p>
                     <strong>R$ 160,00</strong>
                   </div>
                   <img src="img/docinho-tradicionall.jpg">
@@ -393,7 +431,7 @@
                 <div class="product-card"  onclick="openModal('modal34')">
                   <div class="product-info">
                     <h3>Kit 5</h3>
-                    <p>20 Pirulitos de chocolate, 20 maçãs, 20 algodões, 20 pipocas, 10 cupcakes, 5 trufas.</p>
+                    <p>20 Pirulitos de chocolate<br>20 maçãs<br>20 algodões<br>20 pipocas<br>10 cupcakes<br>5 trufas</p>
                     <strong>R$ 180,00</strong>
                   </div>
                   <img src="img/docinho-tradicionall.jpg">
@@ -428,7 +466,7 @@
                     
                     <div class="modal-info" data-cake-name="Bolo 15 fatias">
                         <h2>Bolo 15 fatias</h2>
-                        <p>Delicie-se com o incrível Bolo de 15 fatias da Renata Lira Bolos!</p>
+                        <p>Delicie-se com o incrível Bolo de 15 fatias.</p>
                         <p></p>
                         <strong>R$ 110,00</strong>
                         
@@ -553,7 +591,7 @@
                     
                     <div class="modal-info">
                         <h2>Bolo 20 fatias</h2>
-                        <p>Delicie-se com o incrível Bolo de 20 fatias da Renata Lira Bolos!</p>
+                        <p>Delicie-se com o incrível Bolo de 20 fatias.</p>
                         <p></p>
                         <strong>R$ 150,00</strong>
                         
@@ -677,7 +715,7 @@
                     
                     <div class="modal-info">
                         <h2>Bolo 30 fatias</h2>
-                        <p>Delicie-se com o incrível Bolo de 30 fatias da Renata Lira Bolos!</p>
+                        <p>Delicie-se com o incrível Bolo de 30 fatias.</p>
                         <p></p>
                         <strong>R$ 170,00</strong>
                         
@@ -802,7 +840,7 @@
                     
                     <div class="modal-info">
                         <h2>Bolo 40 fatias</h2>
-                        <p>Delicie-se com o incrível Bolo de 40 fatias da Renata Lira Bolos!</p>
+                        <p>Delicie-se com o incrível Bolo de 40 fatias.</p>
                         <p></p>
                         <strong>R$ 190,00</strong>
                         
@@ -927,7 +965,7 @@
                     
                     <div class="modal-info">
                         <h2>Bolo 50 fatias</h2>
-                        <p>Delicie-se com o incrível Bolo de 50 fatias da Renata Lira Bolos!</p>
+                        <p>Delicie-se com o incrível Bolo de 50 fatias.</p>
                         <p></p>
                         <strong>R$ 210,00</strong>
                         
@@ -1052,7 +1090,7 @@
                     
                     <div class="modal-info">
                         <h2>Bolo 70 fatias</h2>
-                        <p>Delicie-se com o incrível Bolo de 70 fatias da Renata Lira Bolos!</p>
+                        <p>Delicie-se com o incrível Bolo de 70 fatias.</p>
                         <p></p>
                         <strong>R$ 280,00</strong>
                         
@@ -1177,7 +1215,7 @@
                     
                     <div class="modal-info">
                         <h2>Docinhos Tradicionais</h2>
-                        <p>Delicie-se com os incríveis 100 Docinhos Tradicionais da Renata Lira Bolos!</p>
+                        <p>Delicie-se com os incríveis 100 Docinhos Tradicionais.</p>
                         <p></p>
                         <strong>R$ 100,00</strong>
                         
@@ -1236,7 +1274,7 @@
                     
                     <div class="modal-info">
                         <h2>Docinhos Gourmet</h2>
-                        <p>Delicie-se com os incríveis 100 Docinhos Gourmet da Renata Lira Bolos!</p>
+                        <p>Delicie-se com os incríveis 100 Docinhos Gourmet.</p>
                         <p></p>
                         <strong>R$ 130,00</strong>
                         
@@ -1286,12 +1324,12 @@
                 <span class="close" onclick="closeModal('modal9')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/algodao (1).jpg">
                     </div>
         
                     <div class="modal-info">
                         <h2>Algodão</h2>
-                        <p>Delicie-se com os incríveis Algodões da Renata Lira Bolos!</p>
+                        <p>Delicie-se com os incríveis Algodões.</p>
                         <strong>R$ 2,00 (por unidade)</strong>
         
                         <div class="modal-options">
@@ -1314,7 +1352,7 @@
                 <span class="close" onclick="closeModal('modal10')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/macadoamor (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1342,7 +1380,7 @@
                 <span class="close" onclick="closeModal('modal11')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/pirulito (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1370,7 +1408,7 @@
                 <span class="close" onclick="closeModal('modal12')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/pipoca (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1403,6 +1441,11 @@
                     <div class="modal-info1">
 
                         <h2>Carrinho De Pedidos</h2>
+
+                        <!-- Observação atualizada com o texto da imagem -->
+                        <div class="deposit-notice">
+                            <p><strong>OBS:</strong> O pedido só é feito mediante um pagamento à vista de 50% do valor. Aceitamos transferências, pix, cartão de crédito via link de pagamento.</p>
+                        </div>
         
                         <div id="cart-items1" >
                             <!-- Os itens do carrinho serão inseridos dinamicamente aqui -->
@@ -1417,6 +1460,26 @@
                             <label for="phone">Telefone:</label>
                             <input type="tel" id="celular" placeholder="Digite seu telefone..." minlength="16" maxlength="16"required>
         
+                            <label for="delivery-date">Data de Entrega:</label>
+                            <input type="date" id="delivery-date" required>
+                            
+                            <label for="delivery-time">Horário de Entrega:</label>
+                            <select id="delivery-time" required>
+                                <option value="">Selecione um horário</option>
+                                <option value="08:00 - 09:00">08:00 - 09:00</option>
+                                <option value="09:00 - 10:00">09:00 - 10:00</option>
+                                <option value="10:00 - 11:00">10:00 - 11:00</option>
+                                <option value="11:00 - 12:00">11:00 - 12:00</option>
+                                <option value="12:00 - 13:00">12:00 - 13:00</option>
+                                <option value="13:00 - 14:00">13:00 - 14:00</option>
+                                <option value="14:00 - 15:00">14:00 - 15:00</option>
+                                <option value="15:00 - 16:00">15:00 - 16:00</option>
+                                <option value="16:00 - 17:00">16:00 - 17:00</option>
+                                <option value="17:00 - 18:00">17:00 - 18:00</option>
+                                <option value="18:00 - 19:00">18:00 - 19:00</option>
+                                <option value="19:00 - 20:00">19:00 - 20:00</option>
+                            </select>
+
                             <label for="address">Endereço Completo:</label>
                             <input id="address" placeholder="Digite seu endereço..." required></input>
         
@@ -1440,7 +1503,7 @@
                 <span class="close" onclick="closeModal('modal1000')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/cupcakecomchantilly (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1468,7 +1531,7 @@
                 <span class="close" onclick="closeModal('modal15')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/donuts (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1496,7 +1559,7 @@
                 <span class="close" onclick="closeModal('modal16')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/pirulitopasta (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1524,11 +1587,11 @@
                 <span class="close" onclick="closeModal('modal17')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/cupcake pasta americana (1).jpg">
                     </div>
         
                     <div class="modal-info">
-                        <h2>Cupcake</h2>
+                        <h2>Cupcake de pasta americana</h2>
                         <p>Delicie-se com os incríveis Cupcakes da Renata Lira Bolos!</p>
                         <strong>R$ 8,00 (por unidade)</strong>
         
@@ -1552,7 +1615,7 @@
                 <span class="close" onclick="closeModal('modal18')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/bolo no palito (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1580,7 +1643,7 @@
                 <span class="close" onclick="closeModal('modal19')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/bolo no palito pasta americana simples (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1608,7 +1671,7 @@
                 <span class="close" onclick="closeModal('modal20')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/bolo no palito personagens (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1636,7 +1699,7 @@
                 <span class="close" onclick="closeModal('modal21')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/cone trufado (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1664,7 +1727,7 @@
                 <span class="close" onclick="closeModal('modal22')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/trufa (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1692,7 +1755,7 @@
                 <span class="close" onclick="closeModal('modal23')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/alfajor (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1720,7 +1783,7 @@
                 <span class="close" onclick="closeModal('modal24')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/chocomaça (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1748,7 +1811,7 @@
                 <span class="close" onclick="closeModal('modal25')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/verrine (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -1776,7 +1839,7 @@
                 <span class="close" onclick="closeModal('modal26')">&times;</span>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img src="img/docinho gourmett2.jpg">
+                        <img src="img/taça luxuosa (1).jpg">
                     </div>
         
                     <div class="modal-info">
@@ -2233,6 +2296,332 @@
                 </div>
             </div>
 
+        </div>
+
+
+        <!-- Modal Bolo de Corte -->
+        <div id="modal35" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal35')">&times;</span>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img src="img/bolocorte (1).jpg" alt="Bolo de Corte">
+                    </div>
+                    
+                    <div class="modal-info">
+                        <h2>Bolo de Corte</h2>
+                        <p>Delicie-se com o incrível Bolo de Corte, bolo pequeno para fotos de bebê.</p>
+                        <strong>R$ 4,00 por fatia</strong>
+                        
+                        <div class="modal-options">
+                            <h3>Escolha a quantidade de fatias</h3>
+                            <input type="number" id="quantidade35" min="1" value="1" onchange="atualizarPreco(4.00, 'quantidade35', 'precoTotal35')">
+                        </div>
+                        
+                        <p><strong>Total: R$ <span id="precoTotal35">4.00</span></strong></p>
+                        
+                        <div class="modal-options">
+                            <h3>Escolha o recheio</h3>
+                            <label>
+                                <input type="radio" name="recheio" value="Beijinho" required>
+                                <span class="radio-custom"></span>
+                                Beijinho
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Brigadeiro" required>
+                                <span class="radio-custom"></span>
+                                Brigadeiro
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Amendoim" required>
+                                <span class="radio-custom"></span>
+                                Amendoim
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Nozes">
+                                <span class="radio-custom"></span>
+                                Nozes
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ninho">
+                                <span class="radio-custom"></span>
+                                Ninho
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ninho com Morango">
+                                <span class="radio-custom"></span>
+                                Ninho com Morango
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ninho com abacaxi">
+                                <span class="radio-custom"></span>
+                                Ninho com abacaxi
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ferrero Rocher">
+                                <span class="radio-custom"></span>
+                                Ferrero Rocher
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite">
+                                <span class="radio-custom"></span>
+                                Doce de Leite
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com Morango">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com Morango
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com coco">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com coco
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com ameixa">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com ameixa
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com amendoim">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com amendoim
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com abacaxi">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com abacaxi
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com nozes">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com nozes 
+                            </label>
+                        </div>
+
+                        <div class="description-container">
+                            <label for="description${modalId}">Qual o tema do bolo?</label>
+                            <input id="description${modalId}" class="desc" name="description" type="text" placeholder="Ex: Homem Aranha, Capitão América, Botafogo e etc."></input>
+                        </div>
+                        
+                        <button id="add-to-cart-button35" onclick="addToCart('Bolo de Corte', 4.00, 'modal35')">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Smash Cake Simples -->
+        <div id="modal36" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal36')">&times;</span>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img src="img/smashsimples (1).jpg" alt="Bolo de Corte">
+                    </div>
+                    
+                    <div class="modal-info">
+                        <h2>Smash Cake Simples</h2>
+                        <p>Delicie-se com o incrível Smash Cake Simples, bolo pequeno para fotos de bebê.</p>
+                        <strong>R$ 45,00</strong>
+                        
+                        <div class="modal-options">
+                            <h3>Escolha o recheio</h3>
+                            <label>
+                                <input type="radio" name="recheio" value="Beijinho" required>
+                                <span class="radio-custom"></span>
+                                Beijinho
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Brigadeiro" required>
+                                <span class="radio-custom"></span>
+                                Brigadeiro
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Amendoim" required>
+                                <span class="radio-custom"></span>
+                                Amendoim
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Nozes">
+                                <span class="radio-custom"></span>
+                                Nozes
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ninho">
+                                <span class="radio-custom"></span>
+                                Ninho
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ninho com Morango">
+                                <span class="radio-custom"></span>
+                                Ninho com Morango
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ninho com abacaxi">
+                                <span class="radio-custom"></span>
+                                Ninho com abacaxi
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ferrero Rocher">
+                                <span class="radio-custom"></span>
+                                Ferrero Rocher
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite">
+                                <span class="radio-custom"></span>
+                                Doce de Leite
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com Morango">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com Morango
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com coco">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com coco
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com ameixa">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com ameixa
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com amendoim">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com amendoim
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com abacaxi">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com abacaxi
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com nozes">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com nozes 
+                            </label>
+                        </div>
+                        
+                        <div class="description-container">
+                            <label for="description36">Cor do bolo:</label>
+                            <input id="description36" class="desc" name="description" type="text" placeholder="Ex: Azul, Rosa, Verde, etc.">
+                        </div>
+                        
+                        <button id="add-to-cart-button36" onclick="addToCart('Smash Cake Simples', 45.00, 'modal36')">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Smash Cake com Topo 3D -->
+        <div id="modal37" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal37')">&times;</span>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img src="img/smash3d (1).jpg" alt="Smash Cake com Topo 3D">
+                    </div>
+                    
+                    <div class="modal-info">
+                        <h2>Smash Cake com Topo 3D</h2>
+                        <p>Delicie-se com o incrível Smash Cake com Topo 3D, bolo pequeno para fotos de bebê.</p>
+                        <strong>R$ 55,00</strong>
+                        
+                        <div class="modal-options">
+                            <h3>Escolha o recheio</h3>
+                            <label>
+                                <input type="radio" name="recheio" value="Beijinho" required>
+                                <span class="radio-custom"></span>
+                                Beijinho
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Brigadeiro" required>
+                                <span class="radio-custom"></span>
+                                Brigadeiro
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Amendoim" required>
+                                <span class="radio-custom"></span>
+                                Amendoim
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Nozes">
+                                <span class="radio-custom"></span>
+                                Nozes
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ninho">
+                                <span class="radio-custom"></span>
+                                Ninho
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ninho com Morango">
+                                <span class="radio-custom"></span>
+                                Ninho com Morango
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ninho com abacaxi">
+                                <span class="radio-custom"></span>
+                                Ninho com abacaxi
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Ferrero Rocher">
+                                <span class="radio-custom"></span>
+                                Ferrero Rocher
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite">
+                                <span class="radio-custom"></span>
+                                Doce de Leite
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com Morango">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com Morango
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com coco">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com coco
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com ameixa">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com ameixa
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com amendoim">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com amendoim
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com abacaxi">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com abacaxi
+                            </label>
+                            <label>
+                                <input type="radio" name="recheio" value="Doce de Leite com nozes">
+                                <span class="radio-custom"></span>
+                                Doce de Leite com nozes 
+                            </label>
+                        </div>
+                        
+                        <div class="description-container">
+                            <label for="description37">Tema do topo 3D:</label>
+                            <input id="description37" class="desc" name="description" type="text" placeholder="Ex: Ursinho, Coroa, Nuvem, etc.">
+                        </div>
+                        
+                        <button id="add-to-cart-button37" onclick="addToCart('Smash Cake com Topo 3D', 55.00, 'modal37')">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </main>
