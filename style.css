@@ -1233,6 +1233,8 @@ select {
     }
 
     
+
+    
 }
 
 
@@ -1264,3 +1266,63 @@ select {
     display: none; /* Começa escondido */
     line-height: 1.2; /* Melhora o alinhamento vertical do número */
 }
+
+
+
+@media screen and (max-width: 600px) {
+    .modal-content {
+      padding: 16px;
+      max-width: 95%;
+      border-radius: 10px;
+    }
+  
+    .modal-body {
+      gap: 14px;
+    }
+  
+    .modal-info h2 {
+      font-size: 20px;
+    }
+  
+    .modal-options h3 {
+      font-size: 16px;
+    }
+  
+    .modal-options label {
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+  
+    .modal-options input[type="checkbox"],
+    .modal-options input[type="radio"] {
+      width: 16px;
+      height: 16px;
+    }
+  
+    .description-container label {
+      font-size: 15px;
+    }
+  
+    .description-container input {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    #add-to-cart-button1 {
+      font-size: 15px;
+      padding: 12px;
+    }
+  
+
+    .close {
+      top: 12px;
+      right: 16px;
+      font-size: 26px;
+    }
+  }
+  
+
+
+
+
+

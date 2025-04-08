@@ -62,95 +62,204 @@ window.onclick = function(event) {
 
 
 function addToCart(productName, productPrice, modalId) {
-    // Captura a quantidade (se existir no modal)
-    const quantidadeInput = document.querySelector(`#${modalId} input[type="number"]`);
-    const quantidade = quantidadeInput ? parseInt(quantidadeInput.value) || 1 : 1;
-    
-    // Captura o recheio selecionado (se existir)
-    const recheio = document.querySelector(`#${modalId} input[name="recheio"]:checked`)?.value;
+    // 1. Obter referência do modal
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+        console.error(`Modal com ID ${modalId} não encontrado`);
+        return;
+    }
 
-    // Captura o topo selecionado (se existir)
-    const topo = document.querySelector(`#${modalId} input[name="topo"]:checked`)?.value;
+    // 2. Validação dos campos obrigatórios
+    const validation = {
+        topo: {
+            element: modal.querySelector('input[name="topo"]:checked'),
+            message: "Selecione o topo do bolo"
+        },
+        recheio: {
+            elements: modal.querySelectorAll('input[name="recheio"]:checked'),
+            min: 1,
+            max: 2,
+            message: "Selecione entre 1 e 2 recheios"
+        },
+        tema: {
+            value: modal.querySelector('input[name="description"]')?.value.trim(),
+            message: "Digite o tema do bolo"
+        }
+    };
 
-    // Lista de opções que devem ter metade do preço
+    // Verificar campos obrigatórios
+    const errors = [];
+
+    if (!validation.topo.element) {
+        errors.push(validation.topo.message);
+        highlightError([...modal.querySelectorAll('.modal-options h3')].find(h3 => h3.textContent.toLowerCase().includes("topo")));
+    }
+
+    if (
+        validation.recheio.elements.length < validation.recheio.min || 
+        validation.recheio.elements.length > validation.recheio.max
+    ) {
+        errors.push(validation.recheio.message);
+        highlightError([...modal.querySelectorAll('.modal-options h3')].find(h3 => h3.textContent.toLowerCase().includes("recheio")));
+    }
+
+    if (!validation.tema.value) {
+        errors.push(validation.tema.message);
+        highlightError([...modal.querySelectorAll('.modal-options h3')].find(h3 => h3.textContent.toLowerCase().includes("tema")));
+    }
+
+    // Mostrar erros se existirem
+    if (errors.length > 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Preenchimento obrigatório',
+            html: `
+                <p>Você precisa preencher os seguintes campos:</p>
+                <ul style="text-align:left">
+                    ${errors.map(err => `<li>⚠️ ${err}</li>`).join('')}
+                </ul>
+            `,
+            confirmButtonColor: '#d33'
+        });
+        return;
+    }
+
+    // 3. Coletar dados do formulário
+    const getValue = (selector) => modal.querySelector(selector)?.value;
+    const getCheckedValue = (name) => modal.querySelector(`input[name="${name}"]:checked`)?.value;
+    const getCheckedValues = (name) => Array.from(modal.querySelectorAll(`input[name="${name}"]:checked`))
+                                         .map(el => el.value);
+
+    const quantidade = parseInt(getValue('input[type="number"]')) || 1;
+    const recheios = getCheckedValues('recheio');
+    const topo = getCheckedValue('topo');
+    const description = getValue('input[name="description"]')?.trim();
+
+    // 4. Calcular preço
     const opcoesComMetadePreco = [
         "50 Docinhos de Beijinho",
         "50 Docinhos de Brigadeiro",
         "25 Docinhos de Beijinho e 25 Docinhos de Brigadeiro"
     ];
 
-    // Ajusta o preço se for uma das opções especiais
     let total = productPrice;
-    if (opcoesComMetadePreco.includes(recheio)) {
-        total = productPrice / 2; // Metade do preço para essas opções
+    
+    // Aplicar desconto se for uma das opções especiais
+    if (recheios.some(recheio => opcoesComMetadePreco.includes(recheio))) {
+        total = productPrice / 2;
     }
 
-    // Adiciona R$20,00 se for selecionado topo 3D
-    if (topo && topo.includes("3D")) {
+    // Adicionar valor extra para topo 3D
+    if (topo.includes("3D")) {
         total += 20.00;
     }
 
-    // Calcula o total considerando a quantidade
-    total = total * quantidade;
+    // Calcular total considerando quantidade
+    total *= quantidade;
 
-    // Captura a descrição/tema (se existir)
-    const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
-
-    // Mostra mensagem de confirmação centralizada
-    Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Item adicionado ao carrinho!',
-        showConfirmButton: false,
-        timer: 1500,
-        customClass: {
-            popup: 'custom-swal'
-        }
-    });
-
-    // Criação do item no carrinho
-    const cartItemsContainer = document.getElementById("cart-items1");
-    const item = document.createElement("div");
-    item.classList.add("cart-item");
-
-    const removeButton = `<span class="remove-item" onclick="removeFromCart(this)">×</span>`;
-
-    // Monta o conteúdo do item no carrinho (incluindo as novas informações)
-    item.innerHTML = `
-        ${removeButton}
-        <span>${productName} ${quantidade > 1 ? `(x${quantidade})` : ''}</span>
-        ${recheio ? `<br> Recheio: ${recheio}` : ''}
-        ${topo ? `<br> Topo: ${topo}` : ''}
-        ${description ? `<br> Tema: ${description}` : ''}
-        <br> <strong class="item-price">R$ ${total.toFixed(2)}</strong>
-    `;
-
-    // Adiciona ao carrinho
-    cartItemsContainer.appendChild(item);
-
-    // Armazena os dados do item
-    if (!window.cartItems) {
-        window.cartItems = [];
-    }
-    
-    window.cartItems.push({
+    // 5. Criar item do carrinho
+    const cartItem = {
         productName,
-        productPrice: opcoesComMetadePreco.includes(recheio) ? productPrice / 2 : productPrice,
+        productPrice,
         quantidade,
-        recheio,
+        recheios,
+        recheioFormatado: recheios.join(" + "),
         topo,
         description,
         total
-    });
+    };
 
-    // Atualiza o total do carrinho
-    updateCartTotal();
-    
-    // Atualiza o contador do carrinho
-    updateCartCount();
+    // 6. Adicionar ao carrinho
+    addItemToCartUI(cartItem);
+    saveToCartData(cartItem);
+    updateCartDisplay();
 
-    // Fecha o modal
+    // 7. Feedback e limpeza
+    showSuccessMessage();
     closeModal(modalId);
+    resetModalFields(modal);
+
+    // Mostrar mensagem abaixo do botão "Adicionar ao Carrinho"
+    const addButton = modal.querySelector('button.adicionar-ao-carrinho'); // Ajuste o seletor conforme seu HTML
+    if (addButton) {
+        let msg = document.createElement('div');
+        msg.className = 'cart-feedback';
+        msg.style.marginTop = '10px';
+        msg.style.backgroundColor = '#e0ffe0';
+        msg.style.padding = '10px';
+        msg.style.borderRadius = '5px';
+        msg.style.color = '#2e7d32';
+        msg.innerHTML = `
+            <strong>Adicionado ao carrinho:</strong><br>
+            Produto: ${productName}<br>
+            Topo: ${topo}<br>
+            Recheios: ${recheios.join(" + ")}<br>
+            Tema: ${description}
+        `;
+        addButton.parentNode.insertBefore(msg, addButton.nextSibling);
+
+        setTimeout(() => msg.remove(), 5000); // Remove após 5 segundos
+    }
+}
+
+// Funções auxiliares
+function highlightError(element) {
+    if (element) {
+        element.style.color = 'red';
+        element.style.fontWeight = 'bold';
+        setTimeout(() => {
+            element.style.color = '';
+            element.style.fontWeight = '';
+        }, 3000);
+    }
+}
+
+
+function addItemToCartUI(item) {
+    const cartItemsContainer = document.getElementById("cart-items1");
+    const itemElement = document.createElement("div");
+    itemElement.classList.add("cart-item");
+    
+    itemElement.innerHTML = `
+        <span class="remove-item" onclick="removeFromCart(this)">×</span>
+        <span>${item.productName} ${item.quantidade > 1 ? `(x${item.quantidade})` : ''}</span>
+        ${item.recheios.length > 0 ? `<br> Recheio: ${item.recheioFormatado}` : ''}
+        ${item.topo ? `<br> Topo: ${item.topo}` : ''}
+        ${item.description ? `<br> Tema: ${item.description}` : ''}
+        <br> <strong class="item-price">R$ ${item.total.toFixed(2)}</strong>
+    `;
+    
+    cartItemsContainer.appendChild(itemElement);
+}
+
+function saveToCartData(item) {
+    if (!window.cartItems) window.cartItems = [];
+    window.cartItems.push(item);
+}
+
+function updateCartDisplay() {
+    updateCartTotal();
+    updateCartCount();
+}
+
+function showSuccessMessage() {
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Adicionado ao carrinho!',
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: { popup: 'custom-swal' }
+    });
+}
+
+function resetModalFields(modal) {
+    modal.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+        input.checked = false;
+    });
+    modal.querySelectorAll('input[type="text"], textarea').forEach(input => {
+        input.value = '';
+    });
 }
 
 function updateCartCount() {
@@ -259,13 +368,23 @@ function finalizePurchase() {
 
     // Verifica se os campos obrigatórios foram preenchidos
     if (!name || !phone || !address || !deliveryDate || !deliveryTime) {
-        alert("Por favor, preencha todos os campos obrigatórios!");
+        Swal.fire({
+            icon: 'error',
+            title: 'Campos obrigatórios',
+            text: 'Por favor, preencha todos os campos obrigatórios!',
+            confirmButtonColor: '#3085d6',
+        });
         return;
     }
 
     // Verifica se há itens no carrinho
     if (!window.cartItems || window.cartItems.length === 0) {
-        alert("Seu carrinho está vazio! Adicione itens antes de finalizar.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Carrinho vazio',
+            text: 'Seu carrinho está vazio! Adicione itens antes de finalizar.',
+            confirmButtonColor: '#3085d6',
+        });
         return;
     }
 
@@ -277,7 +396,7 @@ function finalizePurchase() {
 
     // Criação da mensagem formatada
     let message = "*PEDIDO RENATA LIRA BOLOS* \n\n";
-    message += `*Data do Pedido:* ${new Date().toLocaleString()}\n`;
+    message += `*Data do Pedido:* ${new Date().toLocaleString('pt-BR')}\n`;
     message += `*Data de Entrega:* ${formattedDate}\n`;
     message += `*Horário de Entrega:* ${deliveryTime}\n\n`;
     message += `*Cliente:* ${name}\n`;
@@ -291,28 +410,32 @@ function finalizePurchase() {
     let total = 0;
     window.cartItems.forEach((item, index) => {
         message += `*${index + 1}. ${item.productName}*\n`;
-        message += `Quantidade: ${item.quantidade} unidades\n`;
-        
+        message += `Quantidade: ${item.quantidade}\n`;
+
+        // Adiciona os recheios se existirem
+        if (item.recheios && item.recheios.length > 0) {
+            message += `Recheios: ${item.recheios.join(" + ")}\n`;
+        } else if (item.recheiosSelecionados && item.recheiosSelecionados.length > 0) {
+            message += `Recheios: ${item.recheiosSelecionados.join(" + ")}\n`;
+        } else if (item.recheio) {
+            message += `Recheio: ${item.recheio}\n`;
+        }
+
         // Adiciona os sabores se existirem (para docinhos)
         if (item.sabores && item.sabores.length > 0) {
             message += `Sabores: ${item.sabores.join(", ")}\n`;
         }
-        
-        // Adiciona o recheio se existir (para bolos)
-        if (item.recheio) {
-            message += `Recheio: ${item.recheio}\n`;
-        }
-        
-        // Adiciona o topo se existir (novo campo adicionado)
+
+        // Adiciona o topo se existir
         if (item.topo) {
             message += `Topo: ${item.topo}\n`;
         }
-        
+
         // Adiciona o tema se existir
         if (item.description) {
             message += `Tema/Detalhes: ${item.description}\n`;
         }
-        
+
         message += `Valor: R$ ${item.total.toFixed(2)}\n\n`;
         total += item.total;
     });
@@ -325,7 +448,7 @@ function finalizePurchase() {
 
     // Codifica a mensagem para URL
     const encodedMessage = encodeURIComponent(message);
-    
+
     // Cria o link do WhatsApp
     const whatsappUrl = `https://wa.me/${renataPhone}?text=${encodedMessage}`;
 
@@ -345,6 +468,7 @@ function finalizePurchase() {
     // Atualiza o contador para zero
     updateCartCount();
 }
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
