@@ -21,6 +21,10 @@ function redirecionarParaPagina5() {
     window.open("https://maps.app.goo.gl/3gXX4un4dZAwni8ZA", "_blank");
 }
 
+function redirecionarParaPagina6() {
+    // Redireciona para o Instagram da WebXS
+    window.open("https://www.instagram.com/webxs_ofc?igsh=MTd4Z2Y5aTA0ZGNhag==", "_blank");
+}
 
 
 // Função para abrir o modal
@@ -65,6 +69,9 @@ function addToCart(productName, productPrice, modalId) {
     // Captura o recheio selecionado (se existir)
     const recheio = document.querySelector(`#${modalId} input[name="recheio"]:checked`)?.value;
 
+    // Captura o topo selecionado (se existir)
+    const topo = document.querySelector(`#${modalId} input[name="topo"]:checked`)?.value;
+
     // Lista de opções que devem ter metade do preço
     const opcoesComMetadePreco = [
         "50 Docinhos de Beijinho",
@@ -78,10 +85,14 @@ function addToCart(productName, productPrice, modalId) {
         total = productPrice / 2; // Metade do preço para essas opções
     }
 
+    // Adiciona R$20,00 se for selecionado topo 3D
+    if (topo && topo.includes("3D")) {
+        total += 20.00;
+    }
+
     // Calcula o total considerando a quantidade
     total = total * quantidade;
 
-    // Restante da função permanece igual...
     // Captura a descrição/tema (se existir)
     const description = document.querySelector(`#${modalId} input[name="description"]`)?.value;
 
@@ -104,11 +115,12 @@ function addToCart(productName, productPrice, modalId) {
 
     const removeButton = `<span class="remove-item" onclick="removeFromCart(this)">×</span>`;
 
-    // Monta o conteúdo do item no carrinho
+    // Monta o conteúdo do item no carrinho (incluindo as novas informações)
     item.innerHTML = `
         ${removeButton}
         <span>${productName} ${quantidade > 1 ? `(x${quantidade})` : ''}</span>
         ${recheio ? `<br> Recheio: ${recheio}` : ''}
+        ${topo ? `<br> Topo: ${topo}` : ''}
         ${description ? `<br> Tema: ${description}` : ''}
         <br> <strong class="item-price">R$ ${total.toFixed(2)}</strong>
     `;
@@ -126,6 +138,7 @@ function addToCart(productName, productPrice, modalId) {
         productPrice: opcoesComMetadePreco.includes(recheio) ? productPrice / 2 : productPrice,
         quantidade,
         recheio,
+        topo,
         description,
         total
     });
@@ -278,20 +291,37 @@ function finalizePurchase() {
     let total = 0;
     window.cartItems.forEach((item, index) => {
         message += `*${index + 1}. ${item.productName}*\n`;
-        if (item.quantidade > 1) message += `🔢 Quantidade: ${item.quantidade}\n`;
-        if (item.recheio) message += `Recheio: ${item.recheio}\n`;
-        if (item.description) message += `Tema/Detalhes: ${item.description}\n`;
+        message += `Quantidade: ${item.quantidade} unidades\n`;
+        
+        // Adiciona os sabores se existirem (para docinhos)
+        if (item.sabores && item.sabores.length > 0) {
+            message += `Sabores: ${item.sabores.join(", ")}\n`;
+        }
+        
+        // Adiciona o recheio se existir (para bolos)
+        if (item.recheio) {
+            message += `Recheio: ${item.recheio}\n`;
+        }
+        
+        // Adiciona o topo se existir (novo campo adicionado)
+        if (item.topo) {
+            message += `Topo: ${item.topo}\n`;
+        }
+        
+        // Adiciona o tema se existir
+        if (item.description) {
+            message += `Tema/Detalhes: ${item.description}\n`;
+        }
+        
         message += `Valor: R$ ${item.total.toFixed(2)}\n\n`;
         total += item.total;
     });
 
     message += "--------------------------------\n";
-    message += `*TOTAL DO PEDIDO: R$ ${total.toFixed(2)}*\n\n`;
-    message += "Muito obrigado pelo pedido! \n";
-    message += "Seu pedido será preparado com todo carinho!\n";
-    message += "Qualquer dúvida, estamos à disposição! \n";
-    message += "O pedido só é feito mediante um pagamento à vista de 50% do valor. Aceitamos transferências, pix, cartão de crédito via link de pagamento. ";
-
+    message += `*VALOR TOTAL: R$ ${total.toFixed(2)}*\n\n`;
+    message += "Agradecemos pela sua encomenda! \n";
+    message += "Seus produtos serão preparados com todo carinho!\n";
+    message += "A confirmação só é realizada mediante pagamento antecipado de 50% do valor. Aceitamos as seguintes formas de pagamento: transferência, PIX ou cartão de crédito via link.";
 
     // Codifica a mensagem para URL
     const encodedMessage = encodeURIComponent(message);
@@ -640,3 +670,168 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Restante do seu código...
 });
+
+
+
+
+
+function addToCartDoces(productName, productPrice, modalId) {
+    // Captura a quantidade selecionada
+    const quantidade = document.querySelector(`#${modalId} input[name="quantidade"]:checked`).value;
+    const isMeioCento = quantidade === "50";
+    
+    // Captura os sabores selecionados
+    const sabores = [];
+    document.querySelectorAll(`#${modalId} input[name="sabor"]:checked`).forEach(checkbox => {
+        sabores.push(checkbox.value);
+    });
+    
+    // Validação de sabores
+    if (sabores.length === 0) {
+        alert("Por favor, selecione pelo menos um sabor!");
+        return;
+    }
+    
+    if (isMeioCento && sabores.length > 2) {
+        alert("Para 1/2 cento, selecione no máximo 2 sabores!");
+        return;
+    }
+    
+    if (!isMeioCento && sabores.length > 4) {
+        alert("Para 1 cento, selecione no máximo 4 sabores!");
+        return;
+    }
+    
+    // Calcula o preço
+    const total = isMeioCento ? productPrice / 2 : productPrice;
+    
+    // Mostra mensagem de confirmação
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Item adicionado ao carrinho!',
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+            popup: 'custom-swal'
+        }
+    });
+    
+    // Criação do item no carrinho
+    const cartItemsContainer = document.getElementById("cart-items1");
+    const item = document.createElement("div");
+    item.classList.add("cart-item");
+    
+    const removeButton = `<span class="remove-item" onclick="removeFromCart(this)">×</span>`;
+    
+    // Monta o conteúdo do item no carrinho
+    item.innerHTML = `
+        ${removeButton}
+        <span>${productName} (${quantidade} unidades)</span>
+        <br> Sabores: ${sabores.join(", ")}
+        <br> <strong class="item-price">R$ ${total.toFixed(2)}</strong>
+    `;
+    
+    // Adiciona ao carrinho
+    cartItemsContainer.appendChild(item);
+    
+    // Armazena os dados do item
+    if (!window.cartItems) {
+        window.cartItems = [];
+    }
+    
+    window.cartItems.push({
+        productName,
+        productPrice: isMeioCento ? productPrice / 2 : productPrice,
+        quantidade,
+        sabores,
+        total
+    });
+    
+    // Atualiza o total do carrinho
+    updateCartTotal();
+    
+    // Atualiza o contador do carrinho
+    updateCartCount();
+    
+    // Fecha o modal
+    closeModal(modalId);
+}
+
+
+
+
+
+
+
+
+// Função para pesquisar o CEP usando ViaCEP
+function pesquisarCEP() {
+    const cep = document.getElementById('cep').value.replace(/\D/g, '');
+    
+    // Verifica se o CEP tem 8 dígitos
+    if (cep.length !== 8) {
+        Swal.fire({
+            icon: 'error',
+            title: 'CEP inválido',
+            text: 'Por favor, digite um CEP válido com 8 dígitos.',
+            confirmButtonColor: '#3085d6',
+        });
+        return;
+    }
+    
+    // Mostra loading
+    Swal.fire({
+        title: 'Buscando endereço...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+    
+    // Faz a requisição para a API ViaCEP
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(response => response.json())
+        .then(data => {
+            Swal.close();
+            
+            if (data.erro) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'CEP não encontrado',
+                    text: 'O CEP informado não foi encontrado. Por favor, verifique e tente novamente.',
+                    confirmButtonColor: '#3085d6',
+                });
+                return;
+            }
+            
+            // Monta o endereço completo com campo para número
+            let enderecoCompleto = '';
+            if (data.logradouro) enderecoCompleto += data.logradouro + ', Nº ';
+            if (data.bairro) enderecoCompleto += ' - ' + data.bairro;
+            if (data.localidade) enderecoCompleto += ' - ' + data.localidade;
+            
+            // Remove hífens iniciais se existirem
+            enderecoCompleto = enderecoCompleto.replace(/^ - /, '').replace(/ - /g, ' - ');
+            
+            // Preenche o campo de endereço e permite edição
+            const addressField = document.getElementById('address');
+            addressField.value = enderecoCompleto;
+            addressField.readOnly = false; // Permite que o usuário edite para adicionar o número
+            
+            // Foca no campo de endereço após o "Nº " para facilitar o preenchimento
+            setTimeout(() => {
+                const posicaoNumero = addressField.value.indexOf('Nº ') + 3;
+                addressField.setSelectionRange(posicaoNumero, posicaoNumero);
+                addressField.focus();
+            }, 100);
+        })
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro na consulta',
+                text: 'Ocorreu um erro ao buscar o CEP. Por favor, tente novamente.',
+                confirmButtonColor: '#3085d6',
+            });
+        });
+}
