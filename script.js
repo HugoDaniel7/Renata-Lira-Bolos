@@ -62,69 +62,13 @@ window.onclick = function(event) {
 
 
 function addToCart(productName, productPrice, modalId) {
-    // 1. Obter referência do modal
     const modal = document.getElementById(modalId);
     if (!modal) {
         console.error(`Modal com ID ${modalId} não encontrado`);
         return;
     }
 
-    // 2. Validação dos campos obrigatórios
-    const validation = {
-        topo: {
-            element: modal.querySelector('input[name="topo"]:checked'),
-            message: "Selecione o topo do bolo"
-        },
-        recheio: {
-            elements: modal.querySelectorAll('input[name="recheio"]:checked'),
-            min: 1,
-            max: 2,
-            message: "Selecione entre 1 e 2 recheios"
-        },
-        tema: {
-            value: modal.querySelector('input[name="description"]')?.value.trim(),
-            message: "Digite o tema do bolo"
-        }
-    };
-
-    // Verificar campos obrigatórios
-    const errors = [];
-
-    if (!validation.topo.element) {
-        errors.push(validation.topo.message);
-        highlightError([...modal.querySelectorAll('.modal-options h3')].find(h3 => h3.textContent.toLowerCase().includes("topo")));
-    }
-
-    if (
-        validation.recheio.elements.length < validation.recheio.min || 
-        validation.recheio.elements.length > validation.recheio.max
-    ) {
-        errors.push(validation.recheio.message);
-        highlightError([...modal.querySelectorAll('.modal-options h3')].find(h3 => h3.textContent.toLowerCase().includes("recheio")));
-    }
-
-    if (!validation.tema.value) {
-        errors.push(validation.tema.message);
-        highlightError([...modal.querySelectorAll('.modal-options h3')].find(h3 => h3.textContent.toLowerCase().includes("tema")));
-    }
-
-    // Mostrar erros se existirem
-    if (errors.length > 0) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Preenchimento obrigatório',
-            html: `
-                <p>Você precisa preencher os seguintes campos:</p>
-                <ul style="text-align:left">
-                    ${errors.map(err => `<li>⚠️ ${err}</li>`).join('')}
-                </ul>
-            `,
-            confirmButtonColor: '#d33'
-        });
-        return;
-    }
-
-    // 3. Coletar dados do formulário
+    // Coletar dados do formulário
     const getValue = (selector) => modal.querySelector(selector)?.value;
     const getCheckedValue = (name) => modal.querySelector(`input[name="${name}"]:checked`)?.value;
     const getCheckedValues = (name) => Array.from(modal.querySelectorAll(`input[name="${name}"]:checked`))
@@ -132,10 +76,10 @@ function addToCart(productName, productPrice, modalId) {
 
     const quantidade = parseInt(getValue('input[type="number"]')) || 1;
     const recheios = getCheckedValues('recheio');
-    const topo = getCheckedValue('topo');
-    const description = getValue('input[name="description"]')?.trim();
+    const topo = getCheckedValue('topo') || 'Sem topo';
+    const description = getValue('input[name="description"]')?.trim() || 'Sem tema';
 
-    // 4. Calcular preço
+    // Calcular preço
     const opcoesComMetadePreco = [
         "50 Docinhos de Beijinho",
         "50 Docinhos de Brigadeiro",
@@ -143,21 +87,18 @@ function addToCart(productName, productPrice, modalId) {
     ];
 
     let total = productPrice;
-    
-    // Aplicar desconto se for uma das opções especiais
+
     if (recheios.some(recheio => opcoesComMetadePreco.includes(recheio))) {
         total = productPrice / 2;
     }
 
-    // Adicionar valor extra para topo 3D
     if (topo.includes("3D")) {
         total += 20.00;
     }
 
-    // Calcular total considerando quantidade
     total *= quantidade;
 
-    // 5. Criar item do carrinho
+    // Criar item do carrinho
     const cartItem = {
         productName,
         productPrice,
@@ -169,18 +110,17 @@ function addToCart(productName, productPrice, modalId) {
         total
     };
 
-    // 6. Adicionar ao carrinho
+    // Adicionar ao carrinho
     addItemToCartUI(cartItem);
     saveToCartData(cartItem);
     updateCartDisplay();
 
-    // 7. Feedback e limpeza
+    // Feedback e limpeza
     showSuccessMessage();
     closeModal(modalId);
     resetModalFields(modal);
 
-    // Mostrar mensagem abaixo do botão "Adicionar ao Carrinho"
-    const addButton = modal.querySelector('button.adicionar-ao-carrinho'); // Ajuste o seletor conforme seu HTML
+    const addButton = modal.querySelector('button.adicionar-ao-carrinho');
     if (addButton) {
         let msg = document.createElement('div');
         msg.className = 'cart-feedback';
@@ -193,14 +133,26 @@ function addToCart(productName, productPrice, modalId) {
             <strong>Adicionado ao carrinho:</strong><br>
             Produto: ${productName}<br>
             Topo: ${topo}<br>
-            Recheios: ${recheios.join(" + ")}<br>
+            Recheios: ${recheios.join(" + ") || 'Nenhum'}<br>
             Tema: ${description}
         `;
         addButton.parentNode.insertBefore(msg, addButton.nextSibling);
-
-        setTimeout(() => msg.remove(), 5000); // Remove após 5 segundos
+        setTimeout(() => msg.remove(), 5000);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Funções auxiliares
 function highlightError(element) {
